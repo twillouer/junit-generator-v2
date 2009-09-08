@@ -1,0 +1,87 @@
+########################################################################################
+##
+## Available variables:
+##         $entryList.methodList - List of method composites
+##         $entryList.privateMethodList - List of private method composites
+##         $entryList.fieldList - ArrayList of class scope field names
+##         $entryList.className - class name
+##         $entryList.packageName - package name
+##         $today - Todays date in MM/dd/yyyy format
+##
+##            MethodComposite variables:
+##                $method.name - Method Name
+##                $method.signature - Full method signature in String form
+##                $method.reflectionCode - list of strings representing commented out reflection code to access method (Private Methods)
+##                $method.paramNames - List of Strings representing the method's parameters' names
+##                $method.paramClasses - List of Strings representing the method's parameters' classes
+##
+## You can configure the output class name using "testClass" variable below.
+## Here are some examples:
+## Test${entry.ClassName} - will produce TestSomeClass
+## ${entry.className}Test - will produce SomeClassTest
+##
+########################################################################################
+##
+#macro (cap $strIn)$strIn.valueOf($strIn.charAt(0)).toUpperCase()$strIn.substring(1)#end
+## Iterate through the list and generate testcase for every entry.
+#foreach ($entry in $entryList)
+#set( $testClass="${entry.className}Test")
+##
+package test.$entry.packageName;
+
+import junit.framework.Test;
+import junit.framework.TestSuite;
+import junit.framework.TestCase;
+
+/**
+ * ${entry.className} Tester.
+ *
+ * @author <Authors name>
+ * @since <pre>$today</pre>
+ * @version 1.0
+ */
+public class $testClass extends TestCase {
+    public $testClass(String name) {
+        super(name);
+    }
+
+    public void setUp() throws Exception {
+        super.setUp();
+    }
+
+    public void tearDown() throws Exception {
+        super.tearDown();
+    }
+
+#foreach($method in $entry.methodList)
+    /**
+     *
+     * Method: $method.signature
+     *
+     */
+    public void test#cap(${method.name})() throws Exception {
+        //TODO: Test goes here...
+    }
+
+#end
+
+#foreach($method in $entry.privateMethodList)
+    /**
+     *
+     * Method: $method.signature
+     *
+     */
+    public void test#cap(${method.name})() throws Exception {
+        //TODO: Test goes here...
+    #foreach($string in $method.reflectionCode)
+    $string
+    #end
+    }
+
+#end
+
+    public static Test suite() {
+        return new TestSuite(${testClass}.class);
+    }
+}
+#end
