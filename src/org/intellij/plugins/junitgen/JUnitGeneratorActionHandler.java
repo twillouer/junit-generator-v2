@@ -9,10 +9,14 @@ import com.intellij.psi.*;
 import org.apache.velocity.Template;
 import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.VelocityEngine;
-import org.intellij.plugins.junitgen.util.GenUtil;
+import org.apache.velocity.runtime.resource.util.StringResourceRepository;
+import org.apache.velocity.runtime.resource.util.StringResourceRepositoryImpl;
+import org.intellij.plugins.junitgen.bean.MethodComposite;
+import org.intellij.plugins.junitgen.bean.TemplateEntry;
+import org.intellij.plugins.junitgen.util.DateTool;
+import org.intellij.plugins.junitgen.util.JUnitGeneratorUtil;
+import org.intellij.plugins.junitgen.util.LogAdapter;
 
-import java.io.FileInputStream;
-import java.io.IOException;
 import java.io.StringWriter;
 import java.util.*;
 
@@ -20,17 +24,15 @@ import java.util.*;
  * This is where the magic happens.
  *
  * @author Alex Nazimok (SCI)
+ * @author Jon Osborn
+ * @author By: Bryan Gilbert, July 18, 2008
  * @since <pre>Sep 3, 2003</pre>
- * @updated By: Bryan Gilbert, July 18, 2008
  */
 public class JUnitGeneratorActionHandler extends EditorWriteActionHandler {
-    private static Logger logger = GenUtil.getLogger(JUnitGeneratorActionHandler.class.getName());
-    private List entryList;
-    private GeneratorContext genCtx;
 
-    private Boolean generateOverload;
-    private String overloadType;
-    private Boolean combineGetterAndSetter;
+    private static final Logger logger = JUnitGeneratorUtil.getLogger(JUnitGeneratorActionHandler.class);
+
+    private static final String VIRTUAL_TEMPLATE_NAME = "junitgenerator.vm";
 
     /**
      * Executed upon action in the Editor
@@ -39,7 +41,7 @@ public class JUnitGeneratorActionHandler extends EditorWriteActionHandler {
      * @param dataContext DataCOntext
      */
     public void executeWriteAction(Editor editor, DataContext dataContext) {
-        PsiJavaFile file = GenUtil.getSelectedJavaFile(dataContext);
+        PsiJavaFile file = JUnitGeneratorUtil.getSelectedJavaFile(dataContext);
 
         if (file == null) {
             return;
@@ -51,58 +53,46 @@ public class JUnitGeneratorActionHandler extends EditorWriteActionHandler {
             return;
         }
 
-        try {
-            generateOverload = GenUtil.getGenerateOverload();
-            overloadType = GenUtil.getGenerateOverloadType();
-            combineGetterAndSetter = GenUtil.getCombineGetterSetter();
-        } catch(IOException e) {
-            e.printStackTrace();
-        }
-
-        for (int i = 0; i < psiClasses.length; i++) {
-            if ((psiClasses[i] != null) && (psiClasses[i].getQualifiedName() != null)) {
-                genCtx = new GeneratorContext(dataContext, file, psiClasses[i]);
-                entryList = new ArrayList();
+        for (PsiClass psiClass : psiClasses) {
+            if ((psiClass != null) && (psiClass.getQualifiedName() != null)) {
+                final GeneratorContext genCtx = new GeneratorContext(dataContext, file, psiClass);
+                final List<TemplateEntry> entryList = new ArrayList<TemplateEntry>();
 
                 try {
-                    if (psiClasses[i] == null) {
-                        return;
-                    }
 
-                    if (!psiClasses[i].isInterface()) {
+                    if (!psiClass.isInterface()) {
                         boolean getPrivate = true;
 
-                        List methodList = new ArrayList();
-                        List pMethodList = new ArrayList();
-                        List fieldList = new ArrayList();
+                        List<PsiMethod> methodList = new ArrayList<PsiMethod>();
+                        List<PsiMethod> pMethodList = new ArrayList<PsiMethod>();
+                        List<String> fieldList = new ArrayList<String>();
 
                         List<MethodComposite> methodCompositeList = new ArrayList<MethodComposite>();
                         List<MethodComposite> privateMethodCompositeList = new ArrayList<MethodComposite>();
 
-                        buildMethodList(psiClasses[i].getMethods(), methodList, !getPrivate);
-                        buildMethodList(psiClasses[i].getMethods(), pMethodList, getPrivate);
-                        buildFieldList(psiClasses[i].getFields(), fieldList);
-                        PsiClass[] innerClass = psiClasses[i].getAllInnerClasses();
+                        buildMethodList(psiClass.getMethods(), methodList, !getPrivate);
+                        buildMethodList(psiClass.getMethods(), pMethodList, getPrivate);
+                        buildFieldList(psiClass.getFields(), fieldList);
+                        PsiClass[] innerClass = psiClass.getAllInnerClasses();
 
-                        for (int idx = 0; idx < innerClass.length; idx++) {
-                            buildMethodList(innerClass[idx].getMethods(), methodList, !getPrivate);
-                            buildMethodList(innerClass[idx].getMethods(), pMethodList, getPrivate);
-                            buildFieldList(psiClasses[i].getFields(), fieldList);
+                        for (PsiClass innerClas : innerClass) {
+                            buildMethodList(innerClas.getMethods(), methodList, !getPrivate);
+                            buildMethodList(innerClas.getMethods(), pMethodList, getPrivate);
+                            buildFieldList(psiClass.getFields(), fieldList);
                         }
 
-                        processMethods(methodList, methodCompositeList);
-                        processMethods(pMethodList, privateMethodCompositeList);
+                        processMethods(genCtx, methodList, methodCompositeList);
+                        processMethods(genCtx, pMethodList, privateMethodCompositeList);
 
                         entryList.add(new TemplateEntry(genCtx.getClassName(false),
-                                                        genCtx.getPackageName(),
-                                                        methodCompositeList,
-                                                        privateMethodCompositeList,
-                                                        fieldList));
-                        process();
+                                genCtx.getPackageName(),
+                                methodCompositeList,
+                                privateMethodCompositeList,
+                                fieldList));
+                        process(genCtx, entryList);
                     }
-                }
-                catch (Exception e) {
-                    GenUtil.getLogger(getClass().getName()).error(e);
+                } catch (Exception e) {
+                    logger.error(e);
                 }
             }
         }
@@ -112,27 +102,29 @@ public class JUnitGeneratorActionHandler extends EditorWriteActionHandler {
     /**
      * Creates a list of methods with set and get methods combined together.
      *
-     * @param methodList list of methods to process
-     * @return a list of methods with set and get methods combined together. 
+     * @param genCtx              the generator context
+     * @param methodList          list of methods to process
+     * @param methodCompositeList the composite list
      */
-    private void processMethods(List methodList, List<MethodComposite> methodCompositeList) {
-        List methodNames = new ArrayList();
+    private void processMethods(GeneratorContext genCtx, List<PsiMethod> methodList, List<MethodComposite> methodCompositeList) {
+        List<String> methodNames = new ArrayList<String>();
         List<MethodComposite> methodComposites;
 
-        methodComposites = convertToComposites(methodList);
+        methodComposites = convertToComposites(genCtx, methodList);
 
-        if(generateOverload) {
-            methodComposites = updateOverloadedMethods(methodComposites);
+        if (JUnitGeneratorSettings.getInstance(genCtx.getProject()).isGenerateForOverloadedMethods()) {
+            methodComposites = updateOverloadedMethods(genCtx, methodComposites);
         }
 
-        for(MethodComposite method : methodComposites) {
+        for (MethodComposite method : methodComposites) {
             String methodName = method.getName();
 
-            if(methodName.startsWith("set") || methodName.startsWith("get") || methodName.startsWith("is") && combineGetterAndSetter) {
+            if (JUnitGeneratorSettings.getInstance(genCtx.getProject()).isCombineGetterAndSetter() &&
+                    methodName.startsWith("set") || methodName.startsWith("get") || methodName.startsWith("is")) {
                 methodName = parseAccessorMutator(methodName, methodList);
             }
 
-            if(!methodNames.contains(methodName)) {
+            if (!methodNames.contains(methodName)) {
                 methodNames.add(methodName);
                 method.setName(methodName);
                 methodCompositeList.add(method);
@@ -142,29 +134,31 @@ public class JUnitGeneratorActionHandler extends EditorWriteActionHandler {
 
     /**
      * Create a MethodComposite object for each of the methods passed in
-     * @param methodList
-     * @return
+     *
+     * @param genCtx     the context
+     * @param methodList the method list
+     * @return the list of methods
      */
-    private List<MethodComposite> convertToComposites(List<PsiMethod> methodList) {
+    private List<MethodComposite> convertToComposites(GeneratorContext genCtx, List<PsiMethod> methodList) {
 
         List<MethodComposite> compositeList = new ArrayList<MethodComposite>();
 
-        for(PsiMethod method : methodList) {
+        for (PsiMethod method : methodList) {
 
             List<String> paramClassList = new ArrayList<String>();
-            for(PsiParameter param : method.getParameterList().getParameters()) {
+            for (PsiParameter param : method.getParameterList().getParameters()) {
                 String className = (new StringTokenizer(param.getText(), " ")).nextToken();
                 paramClassList.add(className);
             }
 
             List<String> paramNameList = new ArrayList<String>();
-            for(PsiParameter param : method.getParameterList().getParameters()) {
+            for (PsiParameter param : method.getParameterList().getParameters()) {
                 paramNameList.add(param.getName());
             }
 
             String signature = createSignature(method);
 
-            List<String> reflectionCode = createReflectionCode(method);
+            List<String> reflectionCode = createReflectionCode(genCtx, method);
 
             MethodComposite composite = new MethodComposite();
             composite.setMethod(method);
@@ -185,12 +179,12 @@ public class JUnitGeneratorActionHandler extends EditorWriteActionHandler {
         String signature;
         String params = "";
 
-        for(PsiParameter param : method.getParameterList().getParameters()) {
+        for (PsiParameter param : method.getParameterList().getParameters()) {
             params += param.getText() + ", ";
         }
 
-        if(params.endsWith(", ")) {
-            params = params.substring(0, params.length()-2);
+        if (params.endsWith(", ")) {
+            params = params.substring(0, params.length() - 2);
         }
 
         signature = method.getName() + "(" + params + ")";
@@ -199,91 +193,92 @@ public class JUnitGeneratorActionHandler extends EditorWriteActionHandler {
 
     }
 
-    private List<String> createReflectionCode(PsiMethod method) {
+    private List<String> createReflectionCode(GeneratorContext genCtx, PsiMethod method) {
 
         String getMethodText = "\"" + method.getName() + "\"";
 
-        for(PsiParameter param : method.getParameterList().getParameters()) {
+        for (PsiParameter param : method.getParameterList().getParameters()) {
             String className = (new StringTokenizer(param.getText(), " ")).nextToken();
             getMethodText = getMethodText + ", " + className + ".class";
         }
 
         List<String> reflectionCode = new ArrayList<String>();
-                reflectionCode.add("/*");
-                reflectionCode.add("try {");
-                reflectionCode.add("   Method method = " + genCtx.getClassName(false) + ".getClass().getMethod(" + getMethodText + ");");
-                reflectionCode.add("   method.setAccessible(true);");
-                reflectionCode.add("   method.invoke(<Object>, <Parameters>);");
-                reflectionCode.add("} catch(NoSuchMethodException e) {");
-                reflectionCode.add("} catch(IllegalAccessException e) {");
-                reflectionCode.add("} catch(InvocationTargetException e) {");
-                reflectionCode.add("}");
-                reflectionCode.add("*/");
+        reflectionCode.add("/*");
+        reflectionCode.add("try {");
+        reflectionCode.add("   Method method = " + genCtx.getClassName(false) + ".getClass().getMethod(" + getMethodText + ");");
+        reflectionCode.add("   method.setAccessible(true);");
+        reflectionCode.add("   method.invoke(<Object>, <Parameters>);");
+        reflectionCode.add("} catch(NoSuchMethodException e) {");
+        reflectionCode.add("} catch(IllegalAccessException e) {");
+        reflectionCode.add("} catch(InvocationTargetException e) {");
+        reflectionCode.add("}");
+        reflectionCode.add("*/");
 
         return reflectionCode;
     }
 
-    private List<MethodComposite> updateOverloadedMethods(List<MethodComposite> methodList) {
+    private List<MethodComposite> updateOverloadedMethods(GeneratorContext context, List<MethodComposite> methodList) {
 
         HashMap<String, Integer> methodNameMap = new HashMap<String, Integer>();
         HashMap<String, Integer> overloadMethodNameMap = new HashMap<String, Integer>();
 
-        for(MethodComposite method : methodList) {
+        for (MethodComposite method : methodList) {
             String methodName = method.getName();
-            if(!methodNameMap.containsKey(methodName)) {
+            if (!methodNameMap.containsKey(methodName)) {
                 methodNameMap.put(methodName, 1);
             } else {
                 Integer count = methodNameMap.get(methodName);
                 methodNameMap.remove(methodName);
-                methodNameMap.put(methodName, count+1);
+                methodNameMap.put(methodName, count + 1);
             }
         }
 
-        for(String key : methodNameMap.keySet()) {
-            if(methodNameMap.get(key) > 1) {
+        for (String key : methodNameMap.keySet()) {
+            if (methodNameMap.get(key) > 1) {
                 overloadMethodNameMap.put(key, methodNameMap.get(key));
             }
         }
-        
-        for(int i = 0; i < methodList.size(); i++) {
+
+        for (int i = 0; i < methodList.size(); i++) {
 
             MethodComposite method = methodList.get(i);
             String methodName = method.getName();
-            if(overloadMethodNameMap.containsKey(methodName)) {
+            if (overloadMethodNameMap.containsKey(methodName)) {
                 int count = overloadMethodNameMap.get(methodName);
                 overloadMethodNameMap.remove(methodName);
-                overloadMethodNameMap.put(methodName, count-1);
-                methodList.set(i, mutateOverloadedMethodName(method, count));
+                overloadMethodNameMap.put(methodName, count - 1);
+                methodList.set(i, mutateOverloadedMethodName(context, method, count));
             }
         }
 
         return methodList;
     }
 
-    private MethodComposite mutateOverloadedMethodName(MethodComposite method, int count) {
+    private MethodComposite mutateOverloadedMethodName(GeneratorContext context, MethodComposite method, int count) {
 
         String stringToAppend = "";
+        final String overloadType = JUnitGeneratorSettings.getInstance(context.getProject()).getListOverloadedMethodsBy();
 
-        if(GenUtil.NUMBER.equalsIgnoreCase(overloadType)) {
+        if (JUnitGeneratorUtil.NUMBER.equalsIgnoreCase(overloadType)) {
             stringToAppend += count;
-        } else if(GenUtil.PARAM_CLASS.equalsIgnoreCase(overloadType)) {
+        } else if (JUnitGeneratorUtil.PARAM_CLASS.equalsIgnoreCase(overloadType)) {
 
-            if(method.getParamClasses().size() > 1) {
-                stringToAppend += "For";    
-            }
-
-            for(String paramClass : method.getParamClasses()) {
-                paramClass = paramClass.substring(0,1).toUpperCase() + paramClass.substring(1,paramClass.length());
-                stringToAppend += paramClass;
-            }
-        } else if(GenUtil.PARAM_NAME.equalsIgnoreCase(overloadType)) {
-
-            if(method.getParamNames().size() > 1) {
+            if (method.getParamClasses().size() > 1) {
                 stringToAppend += "For";
             }
 
-            for(String paramName : method.getParamNames()) {
-                paramName = paramName.substring(0,1).toUpperCase() + paramName.substring(1,paramName.length());
+            for (String paramClass : method.getParamClasses()) {
+                paramClass = paramClass.substring(0, 1).toUpperCase() + paramClass.substring(1, paramClass.length());
+                stringToAppend += paramClass;
+            }
+        } else if (JUnitGeneratorUtil.PARAM_NAME.equalsIgnoreCase(overloadType)) {
+
+            if (method.getParamNames().size() > 1) {
+                stringToAppend += "For";
+            }
+
+            for (String paramName : method.getParamNames()) {
+                paramName = paramName.substring(0, 1).toUpperCase() + paramName.substring(1, paramName.length());
                 stringToAppend += paramName;
             }
         }
@@ -296,6 +291,7 @@ public class JUnitGeneratorActionHandler extends EditorWriteActionHandler {
     /**
      * This method takes in an accessor or mutator method that is named using get*, set*, or is* and combines
      * the method name to provide one method name: "GetSet<BaseName>"
+     *
      * @param methodName - Name of accessor or mutator method
      * @param methodList - Entire list of method using to create test
      * @return String updated method name if list contains both accessor and modifier for base name
@@ -304,13 +300,13 @@ public class JUnitGeneratorActionHandler extends EditorWriteActionHandler {
 
         String baseName;
 
-        if(methodName.startsWith("is")) {
+        if (methodName.startsWith("is")) {
             baseName = methodName.substring(2);
         } else {
             baseName = methodName.substring(3);
         }
 
-        if(methodList.contains("get"+ baseName) && (methodList.contains("set"+ baseName) || methodList.contains("is" + baseName))) {
+        if (methodList.contains("get" + baseName) && (methodList.contains("set" + baseName) || methodList.contains("is" + baseName))) {
             methodName = "GetSet" + baseName;
         }
 
@@ -319,12 +315,13 @@ public class JUnitGeneratorActionHandler extends EditorWriteActionHandler {
 
     /**
      * Builds a list of class scope fields from an array of PsiFields
-     * @param fields an array of fields
+     *
+     * @param fields    an array of fields
      * @param fieldList list to be populated
      */
-    private void buildFieldList(PsiField[] fields, List fieldList) {
-        for(int i = 0; i < fields.length; i++){
-            fieldList.add(fields[i].getName());
+    private void buildFieldList(PsiField[] fields, List<String> fieldList) {
+        for (PsiField field : fields) {
+            fieldList.add(field.getName());
         }
     }
 
@@ -335,14 +332,14 @@ public class JUnitGeneratorActionHandler extends EditorWriteActionHandler {
      * @param methodList list to be populated
      * @param getPrivate boolean value, if true returns only private methods, if false only returns none private methods
      */
-    private void buildMethodList(PsiMethod[] methods, List methodList, boolean getPrivate) {
+    private void buildMethodList(PsiMethod[] methods, List<PsiMethod> methodList, boolean getPrivate) {
 
-        for (int j = 0; j < methods.length; j++) {
-            if (!methods[j].isConstructor()) {
-                PsiModifierList modifiers = methods[j].getModifierList();
+        for (PsiMethod method : methods) {
+            if (!method.isConstructor()) {
+                PsiModifierList modifiers = method.getModifierList();
 
                 if ((!modifiers.hasModifierProperty("private") && !getPrivate) || (modifiers.hasModifierProperty("private") && getPrivate)) {
-                    methodList.add(methods[j]);
+                    methodList.add(method);
                 }
             }
         }
@@ -351,131 +348,57 @@ public class JUnitGeneratorActionHandler extends EditorWriteActionHandler {
     /**
      * Sets all the needed vars in VelocityContext and
      * merges the template
+     *
+     * @param genCtx    the context
+     * @param entryList the list of entries to go into velocity scope
      */
-    private void process() {
+    protected void process(GeneratorContext genCtx, List<TemplateEntry> entryList) {
         try {
-            Properties velocityProperties = new Properties();
-            velocityProperties.setProperty(VelocityEngine.RESOURCE_LOADER, Const.RESOURCE_LOADER_TYPE);
-            velocityProperties.setProperty(Const.RESOURCE_LOADER_CLASS_KEY, Const.RESOURCE_LOADER_CLASS_VALUE);
-            velocityProperties.setProperty(VelocityEngine.FILE_RESOURCE_LOADER_PATH,
-                    GenUtil.getResourcePath(Const.RELATIVE_DIR_NAME));
+            final Properties velocityProperties = new Properties();
+            //use the 'string' resource loader because the template comes from a 'string'
+            velocityProperties.setProperty(VelocityEngine.RESOURCE_LOADER, "string");
+            velocityProperties.setProperty("string.resource.loader.class", "org.apache.velocity.runtime.resource.loader.StringResourceLoader");
+            velocityProperties.setProperty("string.resource.loader.repository.class", "org.apache.velocity.runtime.resource.loader.StringResourceRepositoryImpl");
+            velocityProperties.setProperty("string.resource.loader.repository.static", "false");
+            velocityProperties.setProperty("string.resource.loader.repository.name", "JUnitGenerator");
 
-            VelocityContext context = new VelocityContext();
-            context.put(Const.ENTRY_LIST_VAR_NAME, entryList);
-            context.put(Const.TODAY_VAR_NAME, GenUtil.formatDate("MM/dd/yyyy"));
+            //create the velocity engine with an externalized resource template
+            final VelocityEngine ve = new VelocityEngine(velocityProperties);
+            //set our custom log adapter
+            ve.setProperty("runtime.log.logsystem", new LogAdapter());
+            //manage the repository and put our template in with a name
+            StringResourceRepository repository = new StringResourceRepositoryImpl();
+            repository.putStringResource(VIRTUAL_TEMPLATE_NAME, JUnitGeneratorSettings.getInstance(genCtx.getProject()).getVmTemplate());
+            ve.setApplicationAttribute("JUnitGenerator", repository);
 
-            VelocityEngine ve = new VelocityEngine();
-            ve.init(velocityProperties);
+            //init the engine
+            ve.init();
 
-            Template template = ve.getTemplate(Const.TEMPLATE_NAME);
-            StringWriter writer = new StringWriter();
+            final VelocityContext context = new VelocityContext();
+            context.put("entryList", entryList);
+            context.put("today", JUnitGeneratorUtil.formatDate("MM/dd/yyyy"));
+            context.put("date", new DateTool());
+
+            final Template template = ve.getTemplate(VIRTUAL_TEMPLATE_NAME);
+            final StringWriter writer = new StringWriter();
+
             template.merge(context, writer);
-            genCtx.setOutputFileName((String) context.get(Const.CLASS_NAME_VAR));
-            ApplicationManager.getApplication().runWriteAction(new FileCreator(GenUtil.getOutputFile(genCtx,
-                    genCtx.getOutputFileName()), writer, genCtx));
-        }
-        catch (Exception e) {
+            String outputFileName = (String) context.get("testClass");
+            if (outputFileName == null || outputFileName.trim().length() == 0) {
+                if (entryList != null && entryList.size() > 0) {
+                    outputFileName = entryList.get(0).getClassName() + "Test";
+                } else {
+                    outputFileName = "UnknownTestCaseNameTest";
+                }
+            }
+            ApplicationManager.getApplication()
+                    .runWriteAction(
+                            new JUnitGeneratorFileCreator(
+                                    JUnitGeneratorUtil.resolveOutputFileName(genCtx, outputFileName),
+                                    writer, genCtx));
+        } catch (Exception e) {
             logger.error(e);
         }
     }
 
-    public class MethodComposite {
-
-        private PsiMethod method;
-        private String name;
-        private String signature;
-        private List<String> paramClasses;
-        private List<String> paramNames;
-        private List<String> reflectionCode;
-
-        public PsiMethod getMethod() {
-            return method;
-        }
-
-        public void setMethod(PsiMethod method) {
-            this.method = method;
-        }
-
-        public String getName() {
-            return name;
-        }
-
-        public void setName(String name) {
-            this.name = name;
-        }
-
-        public String getSignature() {
-            return signature;
-        }
-
-        public void setSignature(String signature) {
-            this.signature = signature;
-        }
-
-        public List<String> getParamClasses() {
-            return paramClasses;
-        }
-
-        public void setParamClasses(List<String> paramClasses) {
-            this.paramClasses = paramClasses;
-        }
-
-        public List<String> getParamNames() {
-            return paramNames;
-        }
-
-        public void setParamNames(List<String> paramNames) {
-            this.paramNames = paramNames;
-        }
-
-        public List<String> getReflectionCode() {
-            return reflectionCode;
-        }
-
-        public void setReflectionCode(List<String> reflectionCode) {
-            this.reflectionCode = reflectionCode;
-        }
-    }
-
-    /**
-     * DataHolder class. Needs to be public since velocity is using it in the
-     * template.
-     */
-    public class TemplateEntry {
-        private List<MethodComposite> methodList;
-        private List<MethodComposite> privateMethodList;
-        private List fieldList = new ArrayList();
-
-        private String className;
-        private String packageName;
-
-
-        public TemplateEntry(String className, String packageName, List<MethodComposite> methodList, List<MethodComposite> privateMethodList, List fieldList) {
-            this.className = className;
-            this.packageName = packageName;
-            this.methodList = methodList;
-            this.privateMethodList = privateMethodList;
-            this.fieldList = fieldList;
-        }
-
-        public String getClassName() {
-            return className;
-        }
-
-        public String getPackageName() {
-            return packageName;
-        }
-
-        public List getFieldList() {
-            return fieldList;
-        }
-
-        public List<MethodComposite> getMethodList() {
-            return methodList;
-        }
-
-        public List<MethodComposite> getPrivateMethodList() {
-            return privateMethodList;
-        }
-    }
 }

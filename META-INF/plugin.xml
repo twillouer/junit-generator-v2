@@ -1,0 +1,43 @@
+<idea-plugin version="2" url="http://code.google.com/p/junit-generator-v2">
+    <name>JUnitGenerator V2.0</name>
+    <id>org.intellij.plugins.junitgen</id>
+    <description>This plugin generates JUnit tests from right click 'Generate...' menu</description>
+    <version>1.1</version>
+    <vendor email="josborn@belltracy.com" url="http://www.belltracy.com">Bell Tracy, Ltd.</vendor>
+    <idea-version since-build="8000"/>
+
+    <application-components>
+        <component>
+            <implementation-class>org.intellij.plugins.junitgen.JUnitGenerator</implementation-class>
+        </component>
+    </application-components>
+
+    <project-components>
+        <component>
+            <implementation-class>org.intellij.plugins.junitgen.JUnitGenerator</implementation-class>
+        </component>
+    </project-components>
+
+    <actions>
+        <action id="org.intellij.plugins.junitgen.JUnitGeneratorAction"
+                class="org.intellij.plugins.junitgen.JUnitGeneratorAction" text="JUnit Test"
+                description="Generate a new JUnit Test or merge into an existing one">
+            <add-to-group group-id="GenerateGroup" anchor="after" relative-to-action="JavaGenerateGroup2"/>
+        </action>
+    </actions>
+
+    <extensions defaultExtensionNs="com.intellij">
+        <!-- configurable extension -->
+        <applicationConfigurable instance="org.intellij.plugins.junitgen.ui.JUnitGeneratorConfigurable$App"/>
+        <projectConfigurable instance="org.intellij.plugins.junitgen.ui.JUnitGeneratorConfigurable$Prj"/>
+        <!-- service for the settings -->
+        <applicationService serviceInterface="org.intellij.plugins.junitgen.JUnitGeneratorSettings"
+                            serviceImplementation="org.intellij.plugins.junitgen.JUnitGeneratorSettings$App"/>
+        <projectService serviceInterface="org.intellij.plugins.junitgen.JUnitGeneratorSettings"
+                        serviceImplementation="org.intellij.plugins.junitgen.JUnitGeneratorSettings$Prj"/>
+    </extensions>
+
+    <change-notes>
+
+    </change-notes>
+</idea-plugin>
