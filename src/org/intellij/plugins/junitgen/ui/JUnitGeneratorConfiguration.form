@@ -3,12 +3,12 @@
   <grid id="27dc6" binding="pane" layout-manager="GridLayoutManager" row-count="2" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
     <margin top="6" left="6" bottom="6" right="6"/>
     <constraints>
-      <xy x="20" y="20" width="576" height="232"/>
+      <xy x="20" y="20" width="576" height="261"/>
     </constraints>
     <properties/>
     <border type="none"/>
     <children>
-      <tabbedpane id="bb721" binding="tabbedPane1" default-binding="true">
+      <tabbedpane id="bb721" binding="tabbedPane1">
         <constraints>
           <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false">
             <preferred-size width="200" height="200"/>
@@ -17,7 +17,7 @@
         <properties/>
         <border type="none"/>
         <children>
-          <grid id="aabdd" layout-manager="GridLayoutManager" row-count="5" column-count="3" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+          <grid id="aabdd" layout-manager="GridLayoutManager" row-count="6" column-count="3" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
             <margin top="6" left="6" bottom="6" right="6"/>
             <constraints>
               <tabbedpane title-resource-bundle="vm-template" title-key="junit.generator.ui.title.properties"/>
@@ -85,7 +85,7 @@
               </component>
               <vspacer id="9cde6">
                 <constraints>
-                  <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false">
+                  <grid row="5" column="0" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false">
                     <preferred-size width="157" height="14"/>
                   </grid>
                 </constraints>
@@ -97,6 +97,20 @@
                   </grid>
                 </constraints>
               </hspacer>
+              <component id="c5f5c" class="javax.swing.JLabel">
+                <constraints>
+                  <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <text resource-bundle="vm-template" key="junit.generator.ui.selectedvm.label"/>
+                </properties>
+              </component>
+              <component id="fffc4" class="javax.swing.JComboBox" binding="selectedTemplateComboBox">
+                <constraints>
+                  <grid row="4" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties/>
+              </component>
             </children>
           </grid>
         </children>

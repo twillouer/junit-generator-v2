@@ -1,6 +1,7 @@
-package org.intellij.plugins.junitgen;
+package org.intellij.plugins.junitgen.action;
 
 import com.intellij.openapi.actionSystem.DataContext;
+import com.intellij.openapi.actionSystem.DataKeys;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.editor.Editor;
@@ -11,12 +12,16 @@ import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.VelocityEngine;
 import org.apache.velocity.runtime.resource.util.StringResourceRepository;
 import org.apache.velocity.runtime.resource.util.StringResourceRepositoryImpl;
+import org.intellij.plugins.junitgen.JUnitGeneratorContext;
+import org.intellij.plugins.junitgen.JUnitGeneratorFileCreator;
+import org.intellij.plugins.junitgen.JUnitGeneratorSettings;
 import org.intellij.plugins.junitgen.bean.MethodComposite;
 import org.intellij.plugins.junitgen.bean.TemplateEntry;
 import org.intellij.plugins.junitgen.util.DateTool;
 import org.intellij.plugins.junitgen.util.JUnitGeneratorUtil;
 import org.intellij.plugins.junitgen.util.LogAdapter;
 
+import javax.swing.*;
 import java.io.StringWriter;
 import java.util.*;
 
@@ -46,6 +51,13 @@ public class JUnitGeneratorActionHandler extends EditorWriteActionHandler {
         if (file == null) {
             return;
         }
+        if (JUnitGeneratorSettings.getInstance(DataKeys.PROJECT.getData(dataContext)).getSelectedTemplate() == null) {
+            JOptionPane.showMessageDialog(null,
+                    JUnitGeneratorUtil.getProperty("junit.generator.error.noselectedtemplate"),
+                    JUnitGeneratorUtil.getProperty("junit.generator.error.title"),
+                    JOptionPane.ERROR_MESSAGE);
+            return;
+        }
 
         PsiClass[] psiClasses = file.getClasses();
 
@@ -55,7 +67,7 @@ public class JUnitGeneratorActionHandler extends EditorWriteActionHandler {
 
         for (PsiClass psiClass : psiClasses) {
             if ((psiClass != null) && (psiClass.getQualifiedName() != null)) {
-                final GeneratorContext genCtx = new GeneratorContext(dataContext, file, psiClass);
+                final JUnitGeneratorContext genCtx = new JUnitGeneratorContext(dataContext, file, psiClass);
                 final List<TemplateEntry> entryList = new ArrayList<TemplateEntry>();
 
                 try {
@@ -106,7 +118,7 @@ public class JUnitGeneratorActionHandler extends EditorWriteActionHandler {
      * @param methodList          list of methods to process
      * @param methodCompositeList the composite list
      */
-    private void processMethods(GeneratorContext genCtx, List<PsiMethod> methodList, List<MethodComposite> methodCompositeList) {
+    private void processMethods(JUnitGeneratorContext genCtx, List<PsiMethod> methodList, List<MethodComposite> methodCompositeList) {
         List<String> methodNames = new ArrayList<String>();
         List<MethodComposite> methodComposites;
 
@@ -139,7 +151,7 @@ public class JUnitGeneratorActionHandler extends EditorWriteActionHandler {
      * @param methodList the method list
      * @return the list of methods
      */
-    private List<MethodComposite> convertToComposites(GeneratorContext genCtx, List<PsiMethod> methodList) {
+    private List<MethodComposite> convertToComposites(JUnitGeneratorContext genCtx, List<PsiMethod> methodList) {
 
         List<MethodComposite> compositeList = new ArrayList<MethodComposite>();
 
@@ -193,7 +205,7 @@ public class JUnitGeneratorActionHandler extends EditorWriteActionHandler {
 
     }
 
-    private List<String> createReflectionCode(GeneratorContext genCtx, PsiMethod method) {
+    private List<String> createReflectionCode(JUnitGeneratorContext genCtx, PsiMethod method) {
 
         String getMethodText = "\"" + method.getName() + "\"";
 
@@ -217,7 +229,7 @@ public class JUnitGeneratorActionHandler extends EditorWriteActionHandler {
         return reflectionCode;
     }
 
-    private List<MethodComposite> updateOverloadedMethods(GeneratorContext context, List<MethodComposite> methodList) {
+    private List<MethodComposite> updateOverloadedMethods(JUnitGeneratorContext context, List<MethodComposite> methodList) {
 
         HashMap<String, Integer> methodNameMap = new HashMap<String, Integer>();
         HashMap<String, Integer> overloadMethodNameMap = new HashMap<String, Integer>();
@@ -254,7 +266,7 @@ public class JUnitGeneratorActionHandler extends EditorWriteActionHandler {
         return methodList;
     }
 
-    private MethodComposite mutateOverloadedMethodName(GeneratorContext context, MethodComposite method, int count) {
+    private MethodComposite mutateOverloadedMethodName(JUnitGeneratorContext context, MethodComposite method, int count) {
 
         String stringToAppend = "";
         final String overloadType = JUnitGeneratorSettings.getInstance(context.getProject()).getListOverloadedMethodsBy();
@@ -352,7 +364,7 @@ public class JUnitGeneratorActionHandler extends EditorWriteActionHandler {
      * @param genCtx    the context
      * @param entryList the list of entries to go into velocity scope
      */
-    protected void process(GeneratorContext genCtx, List<TemplateEntry> entryList) {
+    protected void process(JUnitGeneratorContext genCtx, List<TemplateEntry> entryList) {
         try {
             final Properties velocityProperties = new Properties();
             //use the 'string' resource loader because the template comes from a 'string'
@@ -368,7 +380,7 @@ public class JUnitGeneratorActionHandler extends EditorWriteActionHandler {
             ve.setProperty("runtime.log.logsystem", new LogAdapter());
             //manage the repository and put our template in with a name
             StringResourceRepository repository = new StringResourceRepositoryImpl();
-            repository.putStringResource(VIRTUAL_TEMPLATE_NAME, JUnitGeneratorSettings.getInstance(genCtx.getProject()).getVmTemplate());
+            repository.putStringResource(VIRTUAL_TEMPLATE_NAME, JUnitGeneratorSettings.getInstance(genCtx.getProject()).getSelectedTemplate());
             ve.setApplicationAttribute("JUnitGenerator", repository);
 
             //init the engine

@@ -6,7 +6,7 @@ import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.diff.*;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.vfs.VirtualFile;
-import org.intellij.plugins.junitgen.GeneratorContext;
+import org.intellij.plugins.junitgen.JUnitGeneratorContext;
 import org.intellij.plugins.junitgen.util.JUnitGeneratorUtil;
 
 import java.io.IOException;
@@ -29,7 +29,8 @@ public final class DiffFileAction {
      * @param context              the context
      * @throws IOException IO Exception when there are issues
      */
-    public void showDiff(String proposedFileContents, final VirtualFile existingFile, GeneratorContext context) throws IOException {
+    public void showDiff(String proposedFileContents, final VirtualFile existingFile,
+                         JUnitGeneratorContext context) throws IOException {
 
         final Project project = DataKeys.PROJECT.getData(context.getDataContext());
 
@@ -48,8 +49,8 @@ public final class DiffFileAction {
                             project,
                             ActionButtonPresentation.APPLY,
                             ActionButtonPresentation.CANCEL_WITH_PROMPT);
-            request.setWindowTitle("JUnit Merge");
-            request.setVersionTitles(new String[]{"Generated Test", "Merge Result", "Existing Test"});
+            request.setWindowTitle(JUnitGeneratorUtil.getProperty("junit.generator.ui.diff.window.title"));
+            request.setVersionTitles(JUnitGeneratorUtil.getDelimitedProperty("junit.generator.ui.diff.titles", ","));
             request.setHelpId("help.junitgen.merge");
             final DiffTool tool = DiffManager.getInstance().getDiffTool();
             //make sure this request is processed on the proper thread

@@ -4,13 +4,19 @@ import com.intellij.openapi.components.*;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.project.Project;
 import com.intellij.util.xmlb.XmlSerializerUtil;
+import com.intellij.util.xmlb.annotations.Transient;
 import org.intellij.plugins.junitgen.util.JUnitGeneratorUtil;
+
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * This is the settings wrapper. We persist settings to disk in various ways from
  * this class.
  *
- * @author JOsborne
+ * @author Jon Osborn
  * @since 1/4/12 2:56 PM
  */
 public class JUnitGeneratorSettings implements PersistentStateComponent<JUnitGeneratorSettings> {
@@ -97,7 +103,19 @@ public class JUnitGeneratorSettings implements PersistentStateComponent<JUnitGen
         settings.setGenerateForOverloadedMethods(true);
         settings.setListOverloadedMethodsBy("paramName");
         settings.setCombineGetterAndSetter(false);
-        settings.setVmTemplate(JUnitGeneratorUtil.getProperty("junit.generator.vm.default"));
+        final List<String> names = Arrays.asList(JUnitGeneratorUtil.getDelimitedProperty("junit.generator.vm.names", ","));
+        final List<String> templates = JUnitGeneratorUtil.getPropertyList("junit.generator.vm");
+        if (names.size() != templates.size()) {
+            throw new IllegalArgumentException("template names and definitions must be equal");
+        }
+        final Map<String, String> map = new HashMap<String, String>(names.size());
+        for (int i = 0; i < names.size(); i++) {
+            if (settings.getSelectedTemplateKey() == null) {
+                settings.setSelectedTemplateKey(names.get(i));
+            }
+            map.put(names.get(i), templates.get(i));
+        }
+        settings.setVmTemplates(map);
         settings.setUseProjectSettings(false);
     }
 
@@ -105,7 +123,8 @@ public class JUnitGeneratorSettings implements PersistentStateComponent<JUnitGen
     private boolean generateForOverloadedMethods;
     private String listOverloadedMethodsBy;
     private boolean combineGetterAndSetter;
-    private String vmTemplate;
+    private Map<String, String> vmTemplates = new HashMap<String, String>();
+    private String selectedTemplateKey;
     private boolean useProjectSettings;
 
     public String getOutputFilePattern() {
@@ -140,19 +159,32 @@ public class JUnitGeneratorSettings implements PersistentStateComponent<JUnitGen
         this.combineGetterAndSetter = combineGetterAndSetter;
     }
 
-    public String getVmTemplate() {
-        return vmTemplate;
-    }
-
-    public void setVmTemplate(String vmTemplate) {
-        this.vmTemplate = vmTemplate;
-    }
-
     public boolean isUseProjectSettings() {
         return useProjectSettings;
     }
 
     public void setUseProjectSettings(boolean useProjectSettings) {
         this.useProjectSettings = useProjectSettings;
+    }
+
+    public Map<String, String> getVmTemplates() {
+        return vmTemplates;
+    }
+
+    public void setVmTemplates(Map<String, String> vmTemplates) {
+        this.vmTemplates = vmTemplates;
+    }
+
+    public String getSelectedTemplateKey() {
+        return selectedTemplateKey;
+    }
+
+    public void setSelectedTemplateKey(String selectedTemplateKey) {
+        this.selectedTemplateKey = selectedTemplateKey;
+    }
+
+    @Transient
+    public String getSelectedTemplate() {
+        return this.selectedTemplateKey != null ? this.vmTemplates.get(this.selectedTemplateKey) : null;
     }
 }

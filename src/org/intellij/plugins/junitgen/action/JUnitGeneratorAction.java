@@ -1,4 +1,4 @@
-package org.intellij.plugins.junitgen;
+package org.intellij.plugins.junitgen.action;
 
 import com.intellij.openapi.actionSystem.DataContext;
 import com.intellij.openapi.actionSystem.Presentation;

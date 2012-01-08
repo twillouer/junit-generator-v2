@@ -1,10 +1,17 @@
 <idea-plugin version="2" url="http://code.google.com/p/junit-generator-v2">
     <name>JUnitGenerator V2.0</name>
     <id>org.intellij.plugins.junitgen</id>
-    <description>This plugin generates JUnit tests from right click 'Generate...' menu</description>
+    <description><![CDATA[This plugin generates JUnit tests from right click 'Generate...' menu while focused
+    on a java class. The unit test output code can be customized using a provided velocity template to format
+    the code based on the origin class.
+    <p>If a unit test is created where one already exists, the user is prompted for overwrite or merge operation. The merge operation
+    allows the user to selectively create the target file content.</p>]]>
+    </description>
     <version>1.1</version>
     <vendor email="josborn@belltracy.com" url="http://www.belltracy.com">Bell Tracy, Ltd.</vendor>
     <idea-version since-build="8000"/>
+
+    <depends optional="true">com.intellij.modules.java</depends>
 
     <application-components>
         <component>
@@ -19,8 +26,8 @@
     </project-components>
 
     <actions>
-        <action id="org.intellij.plugins.junitgen.JUnitGeneratorAction"
-                class="org.intellij.plugins.junitgen.JUnitGeneratorAction" text="JUnit Test"
+        <action id="org.intellij.plugins.junitgen.action.JUnitGeneratorAction"
+                class="org.intellij.plugins.junitgen.action.JUnitGeneratorAction" text="JUnit Test"
                 description="Generate a new JUnit Test or merge into an existing one">
             <add-to-group group-id="GenerateGroup" anchor="after" relative-to-action="JavaGenerateGroup2"/>
         </action>
@@ -37,7 +44,14 @@
                         serviceImplementation="org.intellij.plugins.junitgen.JUnitGeneratorSettings$Prj"/>
     </extensions>
 
-    <change-notes>
-
+    <change-notes><![CDATA[
+            This revision contains the following updates:</br>
+            <ul>
+            <li>Upgraded to newest version of the open api
+            <li>Added project and application settings areas
+            <li>Fixed an issue when overwriting an existing test case
+            <li>The configuration now uses a form based swing dialog
+            </ul>
+            ]]>
     </change-notes>
 </idea-plugin>

@@ -99,12 +99,13 @@ public abstract class JUnitGeneratorConfigurable implements SearchableConfigurab
      */
     public boolean isModified() {
 
-        boolean delta = !Comparing.equal(this.settings.getVmTemplate(), this.configuration.getVmTemplate()) ||
+        boolean delta = !JUnitGeneratorUtil.isEqual(this.settings.getVmTemplates(), this.configuration.getVmTemplates()) ||
                 !Comparing.equal(this.settings.getListOverloadedMethodsBy(), this.configuration.getListOverloadedMethodsBy()) ||
                 !Comparing.equal(this.settings.getOutputFilePattern(), this.configuration.getOutput()) ||
                 this.settings.isCombineGetterAndSetter() != this.configuration.isCombineGetterAndSetter() ||
                 this.settings.isGenerateForOverloadedMethods() != this.configuration.isGenerateForOverloadedMethods() ||
-                this.settings.isUseProjectSettings() != this.configuration.isUseProjectSettings();
+                this.settings.isUseProjectSettings() != this.configuration.isUseProjectSettings() ||
+                !Comparing.equal(this.settings.getSelectedTemplateKey(), this.configuration.getSelectedTemplateName());
         return this.configuration != null &&
                 ((this.project == null && delta) ||
                         (this.project != null && this.configuration.isUseProjectSettings() && delta) ||
@@ -122,7 +123,8 @@ public abstract class JUnitGeneratorConfigurable implements SearchableConfigurab
                 this.settings.setGenerateForOverloadedMethods(this.configuration.isGenerateForOverloadedMethods());
                 this.settings.setListOverloadedMethodsBy(this.configuration.getListOverloadedMethodsBy());
                 this.settings.setOutputFilePattern(this.configuration.getOutput());
-                this.settings.setVmTemplate(this.configuration.getVmTemplate());
+                this.settings.setVmTemplates(this.configuration.getVmTemplates());
+                this.settings.setSelectedTemplateKey(this.configuration.getSelectedTemplateName());
             }
         }
     }

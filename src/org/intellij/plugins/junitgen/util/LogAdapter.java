@@ -7,7 +7,7 @@ import org.apache.velocity.runtime.log.LogChute;
 /**
  * this class performs adaption between velocity and the logger we have wrapped
  *
- * @author JOsborne
+ * @author Jon Osborn
  * @since 1/3/12 4:28 PM
  */
 public class LogAdapter implements LogChute {

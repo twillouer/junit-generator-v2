@@ -1,6 +1,7 @@
 package org.intellij.plugins.junitgen;
 
 import com.intellij.openapi.actionSystem.DataContext;
+import com.intellij.openapi.actionSystem.DataKeys;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiClass;
 import com.intellij.psi.PsiJavaFile;
@@ -12,13 +13,13 @@ import com.intellij.psi.PsiJavaFile;
  * @author Alex Nazimok (SCI)
  * @since <pre>Sep 3, 2003</pre>
  */
-public class GeneratorContext {
+public class JUnitGeneratorContext {
 
     private final DataContext dataContext;
     private final PsiJavaFile file;
     private final PsiClass psiClass;
 
-    public GeneratorContext(DataContext ctx, PsiJavaFile file, PsiClass psiClass) {
+    public JUnitGeneratorContext(DataContext ctx, PsiJavaFile file, PsiClass psiClass) {
         this.dataContext = ctx;
         this.file = file;
         this.psiClass = psiClass;
@@ -54,6 +55,6 @@ public class GeneratorContext {
      * @return the project
      */
     public Project getProject() {
-        return this.file != null ? this.file.getProject() : null;
+        return DataKeys.PROJECT.getData(this.dataContext);
     }
 }

@@ -36,45 +36,32 @@
     <option name="historyRevisionsNumber" value="4" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="cc621c8e-07fd-478e-8e6d-44bb2b7d7e48" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/org/intellij/plugins/junitgen" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/org/intellij/plugins" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/org/intellij" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/org" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/org/intellij/plugins/junitgen/bean" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/META-INF/plugin.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/vm-template.properties" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/org/intellij/plugins/junitgen/JUnitGeneratorSettings.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/org/intellij/plugins/junitgen/bean/MethodComposite.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/org/intellij/plugins/junitgen/bean/TemplateEntry.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/org/intellij/plugins/junitgen/ui/JUnitGeneratorConfiguration.form" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/org/intellij/plugins/junitgen/ui/JUnitGeneratorConfiguration.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/org/intellij/plugins/junitgen/util/DateTool.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/org/intellij/plugins/junitgen/util/LogAdapter.java" />
-      <change type="DELETED" beforePath="C:\Users\josborne\IdeaProjects\junitv2\junitgen.vm" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\josborne\IdeaProjects\junitv2\src\org\intellij\plugins\junitgen\diff\DiffFileToken.java" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\josborne\IdeaProjects\junitv2\src\org\intellij\plugins\junitgen\diff\DiffPanelHelper.java" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\josborne\IdeaProjects\junitv2\src\org\intellij\plugins\junitgen\diff\DiffViewerFrame.java" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\josborne\IdeaProjects\junitv2\src\org\intellij\plugins\junitgen\util\StringUtil.java" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\josborne\IdeaProjects\junitv2\src\test\org\intellij\plugins" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\josborne\IdeaProjects\junitv2\src\test\org\intellij" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\josborne\IdeaProjects\junitv2\src\test\org" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\josborne\IdeaProjects\junitv2\src\test" afterPath="" />
-      <change type="MOVED" beforePath="C:\Users\josborne\IdeaProjects\junitv2\junitgen.properties" afterPath="$PROJECT_DIR$/src/junitgen.properties" />
-      <change type="MOVED" beforePath="C:\Users\josborne\IdeaProjects\junitv2\src\org\intellij\plugins\junitgen\FileCreator.java" afterPath="$PROJECT_DIR$/src/org/intellij/plugins/junitgen/JUnitGeneratorFileCreator.java" />
-      <change type="MOVED" beforePath="C:\Users\josborne\IdeaProjects\junitv2\src\org\intellij\plugins\junitgen\ui\JUnitGenConfig.java" afterPath="$PROJECT_DIR$/src/org/intellij/plugins/junitgen/ui/JUnitGeneratorConfigurable.java" />
-      <change type="MOVED" beforePath="C:\Users\josborne\IdeaProjects\junitv2\src\org\intellij\plugins\junitgen\util\GenUtil.java" afterPath="$PROJECT_DIR$/src/org/intellij/plugins/junitgen/util/JUnitGeneratorUtil.java" />
+    <list default="true" readonly="true" id="cc621c8e-07fd-478e-8e6d-44bb2b7d7e48" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/org/intellij/plugins/junitgen/action" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/test/org/intellij/plugins/junitgen" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/test/org/intellij/plugins" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/test/org/intellij" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/test/org" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/test" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/test/org/intellij/plugins/junitgen/JUnitGeneratorUtilTest.java" />
+      <change type="DELETED" beforePath="C:\Users\jon\IdeaProjects\junit-generator\src\org\intellij\plugins\junitgen\Const.java" afterPath="" />
+      <change type="MOVED" beforePath="C:\Users\jon\IdeaProjects\junit-generator\src\org\intellij\plugins\junitgen\GeneratorContext.java" afterPath="$PROJECT_DIR$/src/org/intellij/plugins/junitgen/JUnitGeneratorContext.java" />
+      <change type="MOVED" beforePath="C:\Users\jon\IdeaProjects\junit-generator\src\org\intellij\plugins\junitgen\JUnitGeneratorAction.java" afterPath="$PROJECT_DIR$/src/org/intellij/plugins/junitgen/action/JUnitGeneratorAction.java" />
+      <change type="MOVED" beforePath="C:\Users\jon\IdeaProjects\junit-generator\src\org\intellij\plugins\junitgen\JUnitGeneratorActionHandler.java" afterPath="$PROJECT_DIR$/src/org/intellij/plugins/junitgen/action/JUnitGeneratorActionHandler.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/JUnitGenerator.iml" afterPath="$PROJECT_DIR$/JUnitGenerator.iml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/JUnitGenerator.ipr" afterPath="$PROJECT_DIR$/JUnitGenerator.ipr" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/JUnitGenerator.iws" afterPath="$PROJECT_DIR$/JUnitGenerator.iws" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/org/intellij/plugins/junitgen/Const.java" afterPath="$PROJECT_DIR$/src/org/intellij/plugins/junitgen/Const.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/org/intellij/plugins/junitgen/GeneratorContext.java" afterPath="$PROJECT_DIR$/src/org/intellij/plugins/junitgen/GeneratorContext.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/org/intellij/plugins/junitgen/JUnitGenerator.java" afterPath="$PROJECT_DIR$/src/org/intellij/plugins/junitgen/JUnitGenerator.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/org/intellij/plugins/junitgen/JUnitGeneratorAction.java" afterPath="$PROJECT_DIR$/src/org/intellij/plugins/junitgen/JUnitGeneratorAction.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/org/intellij/plugins/junitgen/JUnitGeneratorActionHandler.java" afterPath="$PROJECT_DIR$/src/org/intellij/plugins/junitgen/JUnitGeneratorActionHandler.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/META-INF/plugin.xml" afterPath="$PROJECT_DIR$/META-INF/plugin.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/vm-template.properties" afterPath="$PROJECT_DIR$/resources/vm-template.properties" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/org/intellij/plugins/junitgen/JUnitGeneratorFileCreator.java" afterPath="$PROJECT_DIR$/src/org/intellij/plugins/junitgen/JUnitGeneratorFileCreator.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/org/intellij/plugins/junitgen/JUnitGeneratorSettings.java" afterPath="$PROJECT_DIR$/src/org/intellij/plugins/junitgen/JUnitGeneratorSettings.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/org/intellij/plugins/junitgen/bean/MethodComposite.java" afterPath="$PROJECT_DIR$/src/org/intellij/plugins/junitgen/bean/MethodComposite.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/org/intellij/plugins/junitgen/diff/DiffFileAction.java" afterPath="$PROJECT_DIR$/src/org/intellij/plugins/junitgen/diff/DiffFileAction.java" />
-      <change type="MOVED" beforePath="C:\Users\josborne\IdeaProjects\junitv2\src\org\intellij\plugins\junitgen\ui\smalllogo.gif" afterPath="$PROJECT_DIR$/resources/org/intellij/plugins/junitgen/smalllogo.gif" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/org/intellij/plugins/junitgen/ui/JUnitGeneratorConfigurable.java" afterPath="$PROJECT_DIR$/src/org/intellij/plugins/junitgen/ui/JUnitGeneratorConfigurable.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/org/intellij/plugins/junitgen/ui/JUnitGeneratorConfiguration.form" afterPath="$PROJECT_DIR$/src/org/intellij/plugins/junitgen/ui/JUnitGeneratorConfiguration.form" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/org/intellij/plugins/junitgen/ui/JUnitGeneratorConfiguration.java" afterPath="$PROJECT_DIR$/src/org/intellij/plugins/junitgen/ui/JUnitGeneratorConfiguration.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/org/intellij/plugins/junitgen/util/JUnitGeneratorUtil.java" afterPath="$PROJECT_DIR$/src/org/intellij/plugins/junitgen/util/JUnitGeneratorUtil.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/org/intellij/plugins/junitgen/util/LogAdapter.java" afterPath="$PROJECT_DIR$/src/org/intellij/plugins/junitgen/util/LogAdapter.java" />
     </list>
     <ignored path="JUnitGenerator.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -101,6 +88,47 @@
     <groupTables value="false" />
   </component>
   <component name="DebuggerManager">
+    <line_breakpoints>
+      <breakpoint url="file://$PROJECT_DIR$/test/org/intellij/plugins/junitgen/JUnitGeneratorUtilTest.java" line="50" class="org.intellij.plugins.junitgen.JUnitGeneratorUtilTest" package="org.intellij.plugins.junitgen">
+        <option name="ENABLED" value="true" />
+        <option name="LOG_ENABLED" value="false" />
+        <option name="LOG_EXPRESSION_ENABLED" value="false" />
+        <option name="SUSPEND_POLICY" value="SuspendAll" />
+        <option name="COUNT_FILTER_ENABLED" value="false" />
+        <option name="COUNT_FILTER" value="0" />
+        <option name="CONDITION_ENABLED" value="false" />
+        <option name="CLASS_FILTERS_ENABLED" value="false" />
+        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
+        <option name="CONDITION" value="" />
+        <option name="LOG_MESSAGE" value="" />
+      </breakpoint>
+      <breakpoint url="file://$PROJECT_DIR$/test/org/intellij/plugins/junitgen/JUnitGeneratorUtilTest.java" line="49" class="org.intellij.plugins.junitgen.JUnitGeneratorUtilTest" package="org.intellij.plugins.junitgen">
+        <option name="ENABLED" value="true" />
+        <option name="LOG_ENABLED" value="false" />
+        <option name="LOG_EXPRESSION_ENABLED" value="false" />
+        <option name="SUSPEND_POLICY" value="SuspendAll" />
+        <option name="COUNT_FILTER_ENABLED" value="false" />
+        <option name="COUNT_FILTER" value="0" />
+        <option name="CONDITION_ENABLED" value="false" />
+        <option name="CLASS_FILTERS_ENABLED" value="false" />
+        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
+        <option name="CONDITION" value="" />
+        <option name="LOG_MESSAGE" value="" />
+      </breakpoint>
+      <breakpoint url="file://$PROJECT_DIR$/test/org/intellij/plugins/junitgen/JUnitGeneratorUtilTest.java" line="45" class="org.intellij.plugins.junitgen.JUnitGeneratorUtilTest" package="org.intellij.plugins.junitgen">
+        <option name="ENABLED" value="true" />
+        <option name="LOG_ENABLED" value="false" />
+        <option name="LOG_EXPRESSION_ENABLED" value="false" />
+        <option name="SUSPEND_POLICY" value="SuspendAll" />
+        <option name="COUNT_FILTER_ENABLED" value="false" />
+        <option name="COUNT_FILTER" value="0" />
+        <option name="CONDITION_ENABLED" value="false" />
+        <option name="CLASS_FILTERS_ENABLED" value="false" />
+        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
+        <option name="CONDITION" value="" />
+        <option name="LOG_MESSAGE" value="" />
+      </breakpoint>
+    </line_breakpoints>
     <breakpoint_any>
       <breakpoint>
         <option name="NOTIFY_CAUGHT" value="true" />
@@ -145,7 +173,98 @@
     <favorites_list name="JUnitGenerator" />
   </component>
   <component name="FileEditorManager">
-    <leaf />
+    <leaf>
+      <file leaf-file-name="JUnitGeneratorSettings.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/org/intellij/plugins/junitgen/JUnitGeneratorSettings.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="174" column="0" selection-start="6059" selection-end="6059" vertical-scroll-proportion="0.0">
+              <folding>
+                <element signature="e#4019#4035#0" expanded="true" />
+                <element signature="e#4626#4642#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="JUnitGeneratorConfigurable.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/org/intellij/plugins/junitgen/ui/JUnitGeneratorConfigurable.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="72" column="21" selection-start="2504" selection-end="2509" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="JUnitGeneratorFileCreator.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/org/intellij/plugins/junitgen/JUnitGeneratorFileCreator.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="78" column="115" selection-start="2723" selection-end="3023" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="vm-template.properties" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/resources/vm-template.properties">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="185" column="67" selection-start="7510" selection-end="7510" vertical-scroll-proportion="2.076613">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="JUnitGeneratorUtilTest.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/test/org/intellij/plugins/junitgen/JUnitGeneratorUtilTest.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="46" column="99" selection-start="1458" selection-end="1458" vertical-scroll-proportion="0.0">
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="JUnitGeneratorConfiguration.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/org/intellij/plugins/junitgen/ui/JUnitGeneratorConfiguration.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="166" column="70" selection-start="6209" selection-end="6209" vertical-scroll-proportion="0.0">
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#1222#1230#0" expanded="true" />
+                <element signature="e#4762#4778#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="JUnitGeneratorConfiguration.form" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/org/intellij/plugins/junitgen/ui/JUnitGeneratorConfiguration.form">
+          <provider selected="true" editor-type-id="ui-designer">
+            <state />
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="JUnitGeneratorUtil.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/org/intellij/plugins/junitgen/util/JUnitGeneratorUtil.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="213" column="0" selection-start="7457" selection-end="7457" vertical-scroll-proportion="0.0">
+              <folding>
+                <element signature="e#2540#2548#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="plugin.xml" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/META-INF/plugin.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="28" column="81" selection-start="1365" selection-end="1365" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FindManager">
     <FindUsagesManager>
@@ -165,22 +284,22 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/src/org/intellij/plugins/junitgen/bean/TemplateEntry.java" />
-        <option value="$PROJECT_DIR$/src/org/intellij/plugins/junitgen/Const.java" />
-        <option value="$PROJECT_DIR$/src/org/intellij/plugins/junitgen/GeneratorContext.java" />
-        <option value="$PROJECT_DIR$/META-INF/plugin.xml" />
-        <option value="$PROJECT_DIR$/src/org/intellij/plugins/junitgen/ui/JUnitGeneratorProjectConfigurable.java" />
-        <option value="$PROJECT_DIR$/src/org/intellij/plugins/junitgen/ui/JUnitGeneratorConfiguration.java" />
-        <option value="$PROJECT_DIR$/src/org/intellij/plugins/junitgen/util/DateTool.java" />
-        <option value="$PROJECT_DIR$/src/org/intellij/plugins/junitgen/ui/JUnitGeneratorConfigurable.java" />
-        <option value="$PROJECT_DIR$/src/org/intellij/plugins/junitgen/diff/DiffFileAction.java" />
         <option value="$PROJECT_DIR$/src/org/intellij/plugins/junitgen/JUnitGenerator.java" />
-        <option value="$PROJECT_DIR$/resources/vm-template.properties" />
-        <option value="$PROJECT_DIR$/src/org/intellij/plugins/junitgen/ui/JUnitGeneratorConfiguration.form" />
         <option value="$PROJECT_DIR$/src/org/intellij/plugins/junitgen/JUnitGeneratorActionHandler.java" />
-        <option value="$PROJECT_DIR$/src/org/intellij/plugins/junitgen/JUnitGeneratorSettings.java" />
-        <option value="$PROJECT_DIR$/src/org/intellij/plugins/junitgen/util/JUnitGeneratorUtil.java" />
         <option value="$PROJECT_DIR$/src/org/intellij/plugins/junitgen/JUnitGeneratorFileCreator.java" />
+        <option value="$PROJECT_DIR$/META-INF/plugin.xml" />
+        <option value="$PROJECT_DIR$/src/org/intellij/plugins/junitgen/GeneratorContext.java" />
+        <option value="$PROJECT_DIR$/src/org/intellij/plugins/junitgen/JUnitGeneratorContext.java" />
+        <option value="$PROJECT_DIR$/src/org/intellij/plugins/junitgen/diff/DiffFileAction.java" />
+        <option value="$PROJECT_DIR$/src/org/intellij/plugins/junitgen/bean/MethodComposite.java" />
+        <option value="$PROJECT_DIR$/src/org/intellij/plugins/junitgen/ui/JUnitGeneratorConfiguration.form" />
+        <option value="$PROJECT_DIR$/src/org/intellij/plugins/junitgen/ui/JUnitGeneratorConfigurable.java" />
+        <option value="$PROJECT_DIR$/src/org/intellij/plugins/junitgen/ui/JUnitGeneratorConfiguration.java" />
+        <option value="$PROJECT_DIR$/src/org/intellij/plugins/junitgen/action/JUnitGeneratorActionHandler.java" />
+        <option value="$PROJECT_DIR$/src/org/intellij/plugins/junitgen/JUnitGeneratorSettings.java" />
+        <option value="$PROJECT_DIR$/test/org/intellij/plugins/junitgen/JUnitGeneratorUtilTest.java" />
+        <option value="$PROJECT_DIR$/src/org/intellij/plugins/junitgen/util/JUnitGeneratorUtil.java" />
+        <option value="$PROJECT_DIR$/resources/vm-template.properties" />
       </list>
     </option>
   </component>
@@ -211,7 +330,7 @@
     <OptionsSetting value="true" id="Undo Check Out" />
     <OptionsSetting value="true" id="Get Latest Version" />
     <ConfirmationsSetting value="0" id="Add" />
-    <ConfirmationsSetting value="0" id="Remove" />
+    <ConfirmationsSetting value="2" id="Remove" />
   </component>
   <component name="ProjectPane">
     <subPane>
@@ -279,6 +398,7 @@
       <sortByType />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="PackagesPane">
         <subPane>
           <PATH>
@@ -321,7 +441,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="junitv2" />
+              <option name="myItemId" value="junit-generator" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -331,7 +451,25 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="junitv2" />
+              <option name="myItemId" value="junit-generator" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="test" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="junitgen" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="JUnitGenerator" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="junit-generator" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
@@ -345,7 +483,83 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="junitv2" />
+              <option name="myItemId" value="junit-generator" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="junitgen" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="JUnitGenerator" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="junit-generator" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="junitgen" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="util" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="JUnitGenerator" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="junit-generator" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="junitgen" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="action" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="JUnitGenerator" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="junit-generator" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="resources" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="JUnitGenerator" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="junit-generator" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
@@ -355,34 +569,195 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
+    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatWidth1" value="132" />
     <property name="project.structure.last.edited" value="Modules" />
-    <property name="GoToFile.includeJavaFiles" value="false" />
-    <property name="OverrideImplement.combined" value="true" />
+    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatWidth0" value="114" />
+    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatWidth3" value="46" />
+    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatWidth2" value="132" />
     <property name="project.structure.proportion" value="0.15" />
+    <property name="OverrideImplement.combined" value="true" />
+    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatOrder1" value="1" />
     <property name="options.splitter.main.proportions" value="0.3" />
+    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatOrder0" value="0" />
+    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatOrder3" value="3" />
     <property name="RunManagerConfig.showSettingsBeforeRunnig" value="true" />
-    <property name="options.lastSelected" value="preferences.sourceCode" />
-    <property name="GenerateAntBuildDialog.generateSingleFile" value="false" />
-    <property name="MemberChooser.sorted" value="false" />
+    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatOrder2" value="2" />
+    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_treeWidth2" value="115" />
+    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatOrder5" value="5" />
     <property name="recentsLimit" value="5" />
-    <property name="project.structure.side.proportion" value="0.2" />
-    <property name="GenerateAntBuildDialog.forceTargetJdk" value="true" />
-    <property name="MemberChooser.copyJavadoc" value="false" />
+    <property name="MemberChooser.sorted" value="false" />
+    <property name="GenerateAntBuildDialog.generateSingleFile" value="false" />
+    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_treeWidth1" value="114" />
+    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatOrder4" value="4" />
+    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_treeWidth0" value="115" />
+    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_treeWidth5" value="790" />
+    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_treeWidth4" value="115" />
+    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_treeWidth3" value="115" />
     <property name="GenerateAntBuildDialog.enableUiFormCompile" value="true" />
     <property name="GoToClass.toSaveIncludeLibraries" value="false" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="MemberChooser.showClasses" value="true" />
-    <property name="GenerateAntBuildDialog.backupFiles" value="true" />
+    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatWidth4" value="133" />
+    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatWidth5" value="807" />
     <property name="GoToClass.includeLibraries" value="false" />
-    <property name="options.searchVisible" value="true" />
     <property name="options.splitter.details.proportions" value="0.2" />
+    <property name="GoToFile.includeJavaFiles" value="false" />
+    <property name="ChangesBrowser.SHOW_FLATTEN" value="false" />
+    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_treeOrder5" value="5" />
+    <property name="options.lastSelected" value="preferences.sourceCode" />
+    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_treeOrder3" value="3" />
+    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_treeOrder4" value="4" />
+    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_treeOrder1" value="1" />
+    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_treeOrder2" value="2" />
+    <property name="GenerateAntBuildDialog.forceTargetJdk" value="true" />
+    <property name="project.structure.side.proportion" value="0.2" />
+    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_treeOrder0" value="0" />
+    <property name="MemberChooser.copyJavadoc" value="false" />
+    <property name="GenerateAntBuildDialog.backupFiles" value="true" />
+    <property name="options.searchVisible" value="true" />
     <property name="dynamic.classpath" value="false" />
   </component>
+  <component name="PublishConfig">
+    <servers>
+      <server id="05d7fffe-d2c1-46f2-95b2-67b0473cd724">
+        <serverdata>
+          <mappings>
+            <mapping local="$PROJECT_DIR$" />
+          </mappings>
+        </serverdata>
+      </server>
+    </servers>
+  </component>
   <component name="RunManager" selected="Plugin.JUnitTestGenerator">
+    <configuration default="false" name="JUnitGeneratorUtilTest.testSourcePathExpression" type="JUnit" factoryName="JUnit" temporary="true">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
+        <pattern>
+          <option name="PATTERN" value="org.intellij.plugins.junitgen.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <module name="JUnitGenerator" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" value="org.intellij.plugins.junitgen" />
+      <option name="MAIN_CLASS_NAME" value="org.intellij.plugins.junitgen.JUnitGeneratorUtilTest" />
+      <option name="METHOD_NAME" value="testSourcePathExpression" />
+      <option name="TEST_OBJECT" value="method" />
+      <option name="VM_PARAMETERS" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="wholeProject" />
+      </option>
+      <envs />
+      <patterns />
+      <RunnerSettings RunnerId="Debug">
+        <option name="DEBUG_PORT" value="" />
+        <option name="TRANSPORT" value="0" />
+        <option name="LOCAL" value="true" />
+      </RunnerSettings>
+      <ConfigurationWrapper RunnerId="Debug" />
+      <method />
+    </configuration>
+    <configuration default="false" name="JUnitGeneratorUtilTest.testSourcePathExpression_1" type="JUnit" factoryName="JUnit" temporary="true">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
+        <pattern>
+          <option name="PATTERN" value="org.intellij.plugins.junitgen.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <module name="JUnitGenerator" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" value="org.intellij.plugins.junitgen" />
+      <option name="MAIN_CLASS_NAME" value="org.intellij.plugins.junitgen.JUnitGeneratorUtilTest" />
+      <option name="METHOD_NAME" value="testSourcePathExpression_1" />
+      <option name="TEST_OBJECT" value="method" />
+      <option name="VM_PARAMETERS" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="wholeProject" />
+      </option>
+      <envs />
+      <patterns />
+      <RunnerSettings RunnerId="Debug">
+        <option name="DEBUG_PORT" value="" />
+        <option name="TRANSPORT" value="0" />
+        <option name="LOCAL" value="true" />
+      </RunnerSettings>
+      <RunnerSettings RunnerId="Run" />
+      <ConfigurationWrapper RunnerId="Debug" />
+      <ConfigurationWrapper RunnerId="Run" />
+      <method />
+    </configuration>
+    <configuration default="false" name="JUnitGeneratorUtilTest" type="JUnit" factoryName="JUnit" temporary="true">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
+        <pattern>
+          <option name="PATTERN" value="org.intellij.plugins.junitgen.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <module name="JUnitGenerator" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" value="org.intellij.plugins.junitgen" />
+      <option name="MAIN_CLASS_NAME" value="org.intellij.plugins.junitgen.JUnitGeneratorUtilTest" />
+      <option name="METHOD_NAME" />
+      <option name="TEST_OBJECT" value="class" />
+      <option name="VM_PARAMETERS" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="wholeProject" />
+      </option>
+      <envs />
+      <patterns />
+      <RunnerSettings RunnerId="Run" />
+      <ConfigurationWrapper RunnerId="Run" />
+      <method />
+    </configuration>
+    <configuration default="false" name="JUnitGeneratorUtilTest.testReplacementExpression" type="JUnit" factoryName="JUnit" temporary="true">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
+        <pattern>
+          <option name="PATTERN" value="org.intellij.plugins.junitgen.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <module name="JUnitGenerator" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" value="org.intellij.plugins.junitgen" />
+      <option name="MAIN_CLASS_NAME" value="org.intellij.plugins.junitgen.JUnitGeneratorUtilTest" />
+      <option name="METHOD_NAME" value="testReplacementExpression" />
+      <option name="TEST_OBJECT" value="method" />
+      <option name="VM_PARAMETERS" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="wholeProject" />
+      </option>
+      <envs />
+      <patterns />
+      <RunnerSettings RunnerId="Debug">
+        <option name="DEBUG_PORT" value="" />
+        <option name="TRANSPORT" value="0" />
+        <option name="LOCAL" value="true" />
+      </RunnerSettings>
+      <ConfigurationWrapper RunnerId="Debug" />
+      <method />
+    </configuration>
     <configuration default="true" type="#org.jetbrains.idea.devkit.run.PluginConfigurationType" factoryName="Plugin">
       <module name="JUnitGenerator" />
       <option name="VM_PARAMETERS" value=" -Xms32m -Xmx784m -XX:MaxPermSize=120m -ea" />
@@ -407,24 +782,6 @@
       </method>
     </configuration>
     <configuration default="true" type="FlexUnitRunConfigurationType" factoryName="FlexUnit" adl_options="" air_descriptor_path="" air_program_params="" air_publisher_id="" air_root_dir_path="" air_run_mode="AppDescriptor" browser_family="FIREFOX" class_name="" debugger_sdk="Module SDK" html_or_swf_file_path="" launcher_type="OSDefault" main_class_name="" method_name="" module_name="" output_log_level="" package_name="" player_path="FlashPlayer.exe" port="0" run_mode="HtmlOrSwfFile" run_trusted="true" scope="Class" socket_policy_port="0" url_to_launch="http://">
-      <method>
-        <option name="AntTarget" enabled="false" />
-        <option name="BuildArtifacts" enabled="false" />
-        <option name="Make" enabled="true" />
-        <option name="Maven.BeforeRunTask" enabled="false" />
-      </method>
-    </configuration>
-    <configuration default="true" type="Applet" factoryName="Applet">
-      <module name="" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="HTML_FILE_NAME" />
-      <option name="HTML_USED" value="false" />
-      <option name="WIDTH" value="400" />
-      <option name="HEIGHT" value="300" />
-      <option name="POLICY_FILE" value="C:/Program Files/JetBrains/IntelliJ IDEA 6.0/bin/appletviewer.policy" />
-      <option name="VM_PARAMETERS" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
       <method>
         <option name="AntTarget" enabled="false" />
         <option name="BuildArtifacts" enabled="false" />
@@ -458,6 +815,24 @@
       <envs />
       <properties />
       <listeners />
+      <method>
+        <option name="AntTarget" enabled="false" />
+        <option name="BuildArtifacts" enabled="false" />
+        <option name="Make" enabled="true" />
+        <option name="Maven.BeforeRunTask" enabled="false" />
+      </method>
+    </configuration>
+    <configuration default="true" type="Applet" factoryName="Applet">
+      <module name="" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="HTML_FILE_NAME" />
+      <option name="HTML_USED" value="false" />
+      <option name="WIDTH" value="400" />
+      <option name="HEIGHT" value="300" />
+      <option name="POLICY_FILE" value="C:/Program Files/JetBrains/IntelliJ IDEA 6.0/bin/appletviewer.policy" />
+      <option name="VM_PARAMETERS" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
       <method>
         <option name="AntTarget" enabled="false" />
         <option name="BuildArtifacts" enabled="false" />
@@ -515,7 +890,6 @@
       <module name="JUnitGenerator" />
       <option name="VM_PARAMETERS" value=" -Xms32m -Xmx784m -XX:MaxPermSize=120m -ea" />
       <option name="PROGRAM_PARAMETERS" value="" />
-      <log_file path="$USER_HOME$/.IntelliJIdea11/system/plugins-sandbox/system/log/idea.log" checked="false" skipped="true" show_all="false" alias="IDEA LOG" />
       <RunnerSettings RunnerId="Debug">
         <option name="DEBUG_PORT" value="" />
         <option name="TRANSPORT" value="0" />
@@ -526,8 +900,12 @@
       <ConfigurationWrapper RunnerId="Run" />
       <method />
     </configuration>
-    <list size="1">
+    <list size="5">
       <item index="0" class="java.lang.String" itemvalue="Plugin.JUnitTestGenerator" />
+      <item index="1" class="java.lang.String" itemvalue="JUnit.JUnitGeneratorUtilTest.testSourcePathExpression" />
+      <item index="2" class="java.lang.String" itemvalue="JUnit.JUnitGeneratorUtilTest.testSourcePathExpression_1" />
+      <item index="3" class="java.lang.String" itemvalue="JUnit.JUnitGeneratorUtilTest" />
+      <item index="4" class="java.lang.String" itemvalue="JUnit.JUnitGeneratorUtilTest.testReplacementExpression" />
     </list>
     <configuration name="&lt;template&gt;" type="WebApp" default="true" selected="false">
       <Host>localhost</Host>
@@ -561,7 +939,7 @@
     <option name="IGNORE_SPACES_IN_ANNOTATE" value="true" />
     <option name="SHOW_MERGE_SOURCES_IN_ANNOTATE" value="true" />
     <option name="FORCE_UPDATE" value="false" />
-    <configuration useDefault="true">C:\Users\josborne\AppData\Roaming\Subversion</configuration>
+    <configuration useDefault="true">C:\Users\jon\AppData\Roaming\Subversion</configuration>
     <myIsUseDefaultProxy>true</myIsUseDefaultProxy>
     <supportedVersion>125</supportedVersion>
   </component>
@@ -587,16 +965,16 @@
     <option name="myMappingRoots">
       <list>
         <SvnCopyRootSimple>
-          <option name="myVcsRoot" value="C:\Users\josborne\IdeaProjects\junitv2" />
-          <option name="myCopyRoot" value="C:\Users\josborne\IdeaProjects\junitv2" />
+          <option name="myVcsRoot" value="C:\Users\jon\IdeaProjects\junit-generator" />
+          <option name="myCopyRoot" value="C:\Users\jon\IdeaProjects\junit-generator" />
         </SvnCopyRootSimple>
       </list>
     </option>
     <option name="myMoreRealMappingRoots">
       <list>
         <SvnCopyRootSimple>
-          <option name="myVcsRoot" value="C:\Users\josborne\IdeaProjects\junitv2" />
-          <option name="myCopyRoot" value="C:\Users\josborne\IdeaProjects\junitv2" />
+          <option name="myVcsRoot" value="C:\Users\jon\IdeaProjects\junit-generator" />
+          <option name="myCopyRoot" value="C:\Users\jon\IdeaProjects\junit-generator" />
         </SvnCopyRootSimple>
       </list>
     </option>
@@ -633,32 +1011,32 @@
     <frame x="-8" y="-8" width="1456" height="876" extended-state="6" />
     <editor active="false" />
     <layout>
+      <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25681493" sideWeight="0.5471698" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Data Sources" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3298217" sideWeight="0.95496535" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32884097" sideWeight="0.0" order="17" side_tool="false" content_ui="tabs" />
-      <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.18651363" sideWeight="0.58625335" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Changes" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.52021563" sideWeight="0.0" order="17" side_tool="false" content_ui="tabs" />
+      <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.18651363" sideWeight="0.5471698" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2735849" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24878444" sideWeight="0.68475753" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.28752887" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.45687333" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="IDEtalk Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="IDEtalk" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.6212938" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.37601078" sideWeight="0.5" order="14" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3292683" sideWeight="0.58625335" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.045034643" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25681493" sideWeight="0.58625335" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.23529412" sideWeight="0.47978437" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.044474393" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="SVN Repositories" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32884097" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Maven projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="CheckStyle" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.27598152" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="CheckStyle" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="TeamCity" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.41374663" sideWeight="0.5" order="14" side_tool="false" content_ui="tabs" />
       <window_info id="Web" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="EJB" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="JProfiler" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
@@ -768,84 +1146,125 @@
     </buildFile>
   </component>
   <component name="editorHistoryManager">
-    <entry file="jar://$APPLICATION_HOME_DIR$/lib/openapi.jar!/com/intellij/psi/PsiFile.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="5" column="58" selection-start="199" selection-end="199" vertical-scroll-proportion="0.14623655" />
-      </provider>
-    </entry>
-    <entry file="jar://$APPLICATION_HOME_DIR$/lib/idea.jar!/com/intellij/openapi/options/newEditor/OptionsEditor.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="117" column="16" selection-start="6670" selection-end="6670" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/org/intellij/plugins/junitgen/JUnitGeneratorActionHandler.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="395" column="47" selection-start="16301" selection-end="16301" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/org/intellij/plugins/junitgen/util/JUnitGeneratorUtil.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="180" column="0" selection-start="6105" selection-end="6105" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/org/intellij/plugins/junitgen/ui/JUnitGeneratorConfiguration.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="73" column="16" selection-start="2724" selection-end="2724" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/org/intellij/plugins/junitgen/JUnitGeneratorFileCreator.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="113" column="107" selection-start="4553" selection-end="4553" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/META-INF/plugin.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="10" column="9" selection-start="481" selection-end="481" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/org/intellij/plugins/junitgen/JUnitGenerator.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="14" column="48" selection-start="386" selection-end="386" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/org/intellij/plugins/junitgen/JUnitGeneratorAction.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="19" column="40" selection-start="604" selection-end="604" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/org/intellij/plugins/junitgen/JUnitGeneratorSettings.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="58" column="0" selection-start="2032" selection-end="2032" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/org/intellij/plugins/junitgen/ui/JUnitGeneratorConfigurable.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="124" column="0" selection-start="5207" selection-end="5207" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="jar://$APPLICATION_HOME_DIR$/lib/idea.jar!/com/intellij/openapi/options/newEditor/OptionsEditorDialog.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="50" column="19" selection-start="3049" selection-end="3049" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/org/intellij/plugins/junitgen/diff/DiffFileAction.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="37" column="87" selection-start="1350" selection-end="1350" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/org/intellij/plugins/junitgen/Const.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="11" column="31" selection-start="247" selection-end="247" vertical-scroll-proportion="0.0" />
+        <state line="41" column="79" selection-start="1555" selection-end="1555" vertical-scroll-proportion="0.35380116">
+          <folding />
+        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/org/intellij/plugins/junitgen/bean/MethodComposite.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="70" column="18" selection-start="1482" selection-end="1482" vertical-scroll-proportion="0.54951185" />
+        <state line="12" column="44" selection-start="239" selection-end="240" vertical-scroll-proportion="0.23709902">
+          <folding />
+        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/org/intellij/plugins/junitgen/ui/JUnitGeneratorConfiguration.form">
       <provider selected="true" editor-type-id="ui-designer">
         <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/intellij/plugins/junitgen/action/JUnitGeneratorAction.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="16" column="13" selection-start="490" selection-end="490" vertical-scroll-proportion="0.2682927">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/java/jrmc-3.1.2-1.6.0/jre/lib/rt.jar!/javax/swing/JOptionPane.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="72" column="22" selection-start="4802" selection-end="4802" vertical-scroll-proportion="0.6315789">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/META-INF/plugin.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="28" column="81" selection-start="1365" selection-end="1365" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/intellij/plugins/junitgen/action/JUnitGeneratorActionHandler.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="37" column="0" selection-start="1480" selection-end="1480" vertical-scroll-proportion="0.33333334">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/intellij/plugins/junitgen/ui/JUnitGeneratorConfigurable.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="72" column="21" selection-start="2504" selection-end="2509" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/java/jrmc-3.1.2-1.6.0/jre/lib/rt.jar!/java/io/File.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="10" column="41" selection-start="422" selection-end="422" vertical-scroll-proportion="0.33174226">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$APPLICATION_HOME_DIR$/lib/junit-4.10.jar!/org/junit/internal/runners/model/ReflectiveCallable.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="11" column="40" selection-start="397" selection-end="397" vertical-scroll-proportion="0.44386423">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test/org/intellij/plugins/junitgen/JUnitGeneratorUtilTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="46" column="99" selection-start="1458" selection-end="1458" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/intellij/plugins/junitgen/JUnitGeneratorFileCreator.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="78" column="115" selection-start="2723" selection-end="3023" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/intellij/plugins/junitgen/JUnitGeneratorSettings.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="174" column="0" selection-start="6059" selection-end="6059" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="e#4019#4035#0" expanded="true" />
+            <element signature="e#4626#4642#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/intellij/plugins/junitgen/ui/JUnitGeneratorConfiguration.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="166" column="70" selection-start="6209" selection-end="6209" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#1222#1230#0" expanded="true" />
+            <element signature="e#4762#4778#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/intellij/plugins/junitgen/util/JUnitGeneratorUtil.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="213" column="0" selection-start="7457" selection-end="7457" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="e#2540#2548#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/vm-template.properties">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="185" column="67" selection-start="7510" selection-end="7510" vertical-scroll-proportion="2.076613">
+          <folding />
+        </state>
       </provider>
     </entry>
   </component>
@@ -900,7 +1319,7 @@
       </state>
       <state key="JdkListConfigurable.UI">
         <settings>
-          <last-edited>IDEA IU-111.69</last-edited>
+          <last-edited>1.5</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>

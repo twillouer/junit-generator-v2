@@ -36,7 +36,7 @@ public class JUnitGeneratorFileCreator implements Runnable {
     private StringWriter writer;
     private DataContext ctx;
     private PsiJavaFile file;
-    private GeneratorContext genCtx;
+    private JUnitGeneratorContext genCtx;
 
     /**
      * Default constructor
@@ -45,7 +45,7 @@ public class JUnitGeneratorFileCreator implements Runnable {
      * @param writer     holds the content of the file
      * @param genCtx     generator context
      */
-    public JUnitGeneratorFileCreator(String outputFile, StringWriter writer, GeneratorContext genCtx) {
+    public JUnitGeneratorFileCreator(String outputFile, StringWriter writer, JUnitGeneratorContext genCtx) {
         this.outputFile = outputFile;
         this.writer = writer;
         this.ctx = genCtx.getDataContext();

@@ -7,7 +7,7 @@ import java.util.List;
 /**
  * A holder for the dissection of the methods
  *
- * @author JOsborne
+ * @author Jon Osborn
  * @since 1/3/12 4:37 PM
  */
 public class MethodComposite {
