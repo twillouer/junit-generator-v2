@@ -12,12 +12,15 @@ import org.intellij.plugins.junitgen.util.JUnitGeneratorUtil;
  * JUnitGenerator action implementation
  *
  * @author Alex Nazimok (SCI)
+ * @author Jon Osborn
  * @since <pre>Aug 28, 2003</pre>
  */
 public class JUnitGeneratorAction extends EditorAction {
 
-    public JUnitGeneratorAction() {
-        super(new JUnitGeneratorActionHandler());
+    public JUnitGeneratorAction(String name) {
+        super(new JUnitGeneratorActionHandler(name));
+        getTemplatePresentation().setDescription("description");
+        getTemplatePresentation().setText(name, false);
     }
 
     /**

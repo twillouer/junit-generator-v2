@@ -4,6 +4,7 @@ import com.intellij.openapi.actionSystem.DataKeys;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.diff.*;
+import com.intellij.openapi.fileEditor.FileEditorManager;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.vfs.VirtualFile;
 import org.intellij.plugins.junitgen.JUnitGeneratorContext;
@@ -59,6 +60,17 @@ public final class DiffFileAction {
                     try {
                         tool.show(request);
                         log.debug("Showed Diff Tool");
+                        int result = request.getResult();
+                        log.debug(String.format("Merge result was %d", result));
+                        if (result == 0) {
+                            //now open the file
+                            ApplicationManager.getApplication().invokeLater(new Runnable() {
+                                @Override
+                                public void run() {
+                                    FileEditorManager.getInstance(project).openFile(existingFile, true, true);
+                                }
+                            });
+                        }
                     } catch (Exception e) {
                         log.error("Exception while processing merge", e);
                     }

@@ -6,6 +6,7 @@ import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.editor.actionSystem.EditorWriteActionHandler;
+import com.intellij.openapi.project.Project;
 import com.intellij.psi.*;
 import org.apache.velocity.Template;
 import org.apache.velocity.VelocityContext;
@@ -39,6 +40,16 @@ public class JUnitGeneratorActionHandler extends EditorWriteActionHandler {
 
     private static final String VIRTUAL_TEMPLATE_NAME = "junitgenerator.vm";
 
+    private final String templateKey;
+
+    public JUnitGeneratorActionHandler(String name) {
+        this.templateKey = name;
+    }
+
+    public String getTemplate(Project project) {
+        return JUnitGeneratorSettings.getInstance(project).getTemplate(this.templateKey);
+    }
+
     /**
      * Executed upon action in the Editor
      *
@@ -51,7 +62,8 @@ public class JUnitGeneratorActionHandler extends EditorWriteActionHandler {
         if (file == null) {
             return;
         }
-        if (JUnitGeneratorSettings.getInstance(DataKeys.PROJECT.getData(dataContext)).getSelectedTemplate() == null) {
+        if (this.templateKey == null || this.templateKey.trim().length() == 0 ||
+                getTemplate(DataKeys.PROJECT.getData(dataContext)) == null) {
             JOptionPane.showMessageDialog(null,
                     JUnitGeneratorUtil.getProperty("junit.generator.error.noselectedtemplate"),
                     JUnitGeneratorUtil.getProperty("junit.generator.error.title"),
@@ -380,7 +392,7 @@ public class JUnitGeneratorActionHandler extends EditorWriteActionHandler {
             ve.setProperty("runtime.log.logsystem", new LogAdapter());
             //manage the repository and put our template in with a name
             StringResourceRepository repository = new StringResourceRepositoryImpl();
-            repository.putStringResource(VIRTUAL_TEMPLATE_NAME, JUnitGeneratorSettings.getInstance(genCtx.getProject()).getSelectedTemplate());
+            repository.putStringResource(VIRTUAL_TEMPLATE_NAME, getTemplate(genCtx.getProject()));
             ve.setApplicationAttribute("JUnitGenerator", repository);
 
             //init the engine

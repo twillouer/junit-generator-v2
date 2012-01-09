@@ -121,7 +121,7 @@ public class JUnitGeneratorFileCreator implements Runnable {
                 });
             } else if (JOptionPane.YES_OPTION == overwriteInd) {
                 //user wants to merge, so create the files and we get them together
-                new DiffFileAction().showDiff(writer.toString(), virtualFile, this.genCtx);
+                new DiffFileAction().showDiff(writer.toString(), fileToOpen, this.genCtx);
             } else {
                 log.warn("Couldn't create the virtual file for some reason");
             }

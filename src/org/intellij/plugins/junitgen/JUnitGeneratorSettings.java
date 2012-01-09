@@ -110,9 +110,6 @@ public class JUnitGeneratorSettings implements PersistentStateComponent<JUnitGen
         }
         final Map<String, String> map = new HashMap<String, String>(names.size());
         for (int i = 0; i < names.size(); i++) {
-            if (settings.getSelectedTemplateKey() == null) {
-                settings.setSelectedTemplateKey(names.get(i));
-            }
             map.put(names.get(i), templates.get(i));
         }
         settings.setVmTemplates(map);
@@ -184,7 +181,10 @@ public class JUnitGeneratorSettings implements PersistentStateComponent<JUnitGen
     }
 
     @Transient
-    public String getSelectedTemplate() {
-        return this.selectedTemplateKey != null ? this.vmTemplates.get(this.selectedTemplateKey) : null;
+    public String getTemplate(String key) {
+        if (key != null) {
+            return this.vmTemplates.get(key);
+        }
+        return null;
     }
 }
