@@ -50,7 +50,7 @@ public class JUnitGeneratorUtil {
     /**
      * The icon is static so we load it here and once
      */
-    public static final Icon ICON = IconLoader.getIcon("/org/intellij/plugins/junitgen/smalllogo.gif");
+    public static final Icon ICON = IconLoader.getIcon("/org/intellij/plugins/junitgen/logo.png");
 
 
     /**

@@ -29,18 +29,10 @@
         <group id="org.intellij.plugins.junitgen.action.JUnitGeneratorMenu"
                class="org.intellij.plugins.junitgen.action.JUnitGeneratorGroup"
                popup="true"
-               text="JUnit Test">
+               text="JUnit Test"
+               icon="/org/intellij/plugins/junitgen/logo.png">
             <add-to-group group-id="GenerateGroup" anchor="after" relative-to-action="JavaGenerateGroup2"/>
-            <!--
-            <action id="org.intellij.plugins.junitgen.action.JUnitGeneratorAction2"
-                    class="org.intellij.plugins.junitgen.action.JUnitGeneratorAction" text="JUnit Test2"
-                    description="Generate a new JUnit Test or merge into an existing one"/>
-            <separator/>
-            <action id="org.intellij.plugins.junitgen.action.JUnitGeneratorAction3"
-                    class="org.intellij.plugins.junitgen.action.JUnitGeneratorAction" text="JUnit Test3"
-                    description="Generate a new JUnit Test or merge into an existing one"/>-->
         </group>
-
     </actions>
 
     <extensions defaultExtensionNs="com.intellij">
@@ -61,6 +53,8 @@
             <li>Added project and application settings areas
             <li>Fixed an issue when overwriting an existing test case
             <li>The configuration now uses a form based swing dialog
+            <li>Multiple templates can be selected from the menu
+            <li>Various other improvements and code enhancements
             </ul>
             ]]>
     </change-notes>
