@@ -1,14 +1,17 @@
 <project name="junitgen" basedir="." default="all">
-    <target name="init" description="initializes all the variables for the build" >
+    <target name="init" description="initializes all the variables for the build">
         <property file="build.properties"/>
 
-        <fail unless="idea.home" message="idea.home property is missing, see build.properties"/>
-        <fail unless="Version" message="Version property is missing, see build.properties"/>
+        <fail unless="idea.home" message="idea.home property is missing. Add via -Didea.home="/>
+        <fail unless="Version" message="Version property is missing, see build.properties or set the JDK property if running inside intellij"/>
 
-        <property name="source.dir" value="."/>
+        <property name="source.dir" value="./src"/>
+        <property name="resources.dir" value="./resources"/>
+        <property name="target.dir" value="./target"/>
         <property name="jar.file.name" value="junitgen.jar"/>
         <property name="dist.file" location="junitgen-${Version}"/>
-        <property name="dist.dir" value="${source.dir}/dist"/>
+        <property name="dist.dir" value="./dist"/>
+        <property name="test.dir" value="./test"/>
         <property name="idea.lib" value="${idea.home}/lib"/>
 
         <filterset id="dirs.filterset">
@@ -17,62 +20,92 @@
 
         <path id="class.path">
             <pathelement path="${idea.lib}/openapi.jar"/>
-	    <pathelement path="${idea.lib}/extensions.jar"/>
+            <pathelement path="${idea.lib}/extensions.jar"/>
+            <pathelement path="${idea.lib}/util.jar"/>
+            <pathelement path="${idea.lib}/annotations.jar"/>
             <pathelement path="${idea.lib}/idea.jar"/>
             <pathelement path="${idea.lib}/velocity.jar"/>
         </path>
+
+        <path id="test.class.path">
+            <path refid="class.path"/>
+            <pathelement path="${target.dir}/classes"/>
+            <pathelement path="${target.dir}/testclasses"/>
+            <pathelement path="${idea.lib}/junit-4.10.jar"/>
+            <pathelement path="${idea.lib}/trove4j.jar"/>
+        </path>
     </target>
 
-    <target name="all" depends="clean, compile, deploy" description="executes all the targets in the build file" />
+    <target name="all" depends="clean, compile, deploy, test"
+            description="executes all the targets in the build file"/>
 
-    <target name="compile" depends="init" description="compiles the source" >
-        <mkdir dir="classes"/>
+    <target name="compile" depends="init" description="compiles the source">
+        <mkdir dir="${target.dir}/classes"/>
         <javac
-            srcdir="${source.dir}"
-            destdir="${source.dir}/classes"
-            deprecation="true"
-            debug="true">
+                srcdir="${source.dir}"
+                destdir="${target.dir}/classes"
+                deprecation="true"
+                debug="false"
+                includeantruntime="false">
             <include name="**/*.java"/>
             <classpath refid="class.path"/>
         </javac>
     </target>
 
-    <target name="deploy" depends="compile" description="creates all the needed distribution files and packages them into zip file." >
-        <zip file="${dist.file}-src.zip" basedir="${source.dir}"/>
-        <mkdir dir="${dist.dir}"/>
-        <mkdir dir="${source.dir}/classes/META-INF"/>
+    <target name="deploy" depends="test"
+            description="creates all the needed distribution files and packages them into zip file.">
 
-        <copy todir="${source.dir}/classes/META-INF">
-            <fileset dir="${source.dir}/META-INF"/>
+        <!-- the sources -->
+        <zip file="${dist.file}-src.zip">
+            <fileset dir="${source.dir}"/>
+            <fileset dir="${resources.dir}"/>
+            <fileset dir="${test.dir}"/>
+            <fileset dir="${basedir}" includes="build.xml,build.properties"/>
+        </zip>
+
+        <!-- the binary -->
+        <mkdir dir="${dist.dir}"/>
+
+        <!-- copy everything we need into the directory -->
+        <copy todir="${dist.dir}">
+            <fileset dir="${resources.dir}"/>
+            <fileset dir="${target.dir}/classes"/>
             <filterset refid="dirs.filterset"/>
         </copy>
 
         <jar
-            jarfile="${dist.dir}/${jar.file.name}"
-            basedir="classes"
-            includes="**"
-            excludes="**/*build.xml, **/*.vm"/>
+                jarfile="${dist.file}.jar"
+                basedir="${dist.dir}"
+                includes="**"/>
 
-        <jar
-            jarfile="${dist.dir}/${jar.file.name}"
-            basedir="${source.dir}"
-            includes="**/*.gif"
-            update="true" />
+        <!--delete dir="${dist.dir}" includeemptydirs="yes"/-->
+    </target>
 
+    <target name="compile-test" depends="compile">
+        <mkdir dir="${target.dir}/testclasses"/>
+        <javac srcdir="${test.dir}"
+               destdir="${target.dir}/testclasses"
+               includeantruntime="false">
+            <classpath refid="test.class.path"/>
+        </javac>
+    </target>
 
-        <mkdir dir="${dist.dir}/resources"/>
-
-        <copy todir="${dist.dir}/resources">
-            <fileset dir="." includes="**/junitgen.vm, **/junitgen.properties"/>
-        </copy>
-
-        <zip file="${dist.file}.zip" basedir="${dist.dir}"/>
-        <delete dir="${dist.dir}" includeemptydirs="yes"/>
+    <target name="test" depends="compile-test"
+            description="Execute the JUnit tests">
+        <mkdir dir="${target.dir}/test-results"/>
+        <junit printsummary="true" fork="false" haltonfailure="yes">
+            <formatter type="plain" usefile="false"/>
+            <classpath refid="test.class.path"/>
+            <batchtest todir="${target.dir}/test-results">
+                <fileset dir="${target.dir}/testclasses" includes="**/*Test*.class"/>
+            </batchtest>
+        </junit>
     </target>
 
     <target name="clean" depends="init">
-        <delete dir="./classes" includeemptydirs="yes"/>
-        <delete file="${dist.file}.zip"/>
+        <delete dir="${dist.dir}" includeemptydirs="yes"/>
+        <delete dir="${target.dir}" includeemptydirs="yes"/>
+        <delete file="${dist.file}.jar"/>
         <delete file="${dist.file}-src.zip"/>
     </target>
 
