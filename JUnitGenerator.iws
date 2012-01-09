@@ -37,11 +37,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" readonly="true" id="cc621c8e-07fd-478e-8e6d-44bb2b7d7e48" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/org/intellij/plugins/junitgen/logo.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/org/intellij/plugins/junitgen/smalllogo.gif" afterPath="$PROJECT_DIR$/resources/org/intellij/plugins/junitgen/smalllogo.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/META-INF/plugin.xml" />
+      <change type="DELETED" beforePath="C:\Users\jon\IdeaProjects\junit-generator\resources\META-INF\plugin.xml" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/JUnitGenerator.iws" afterPath="$PROJECT_DIR$/JUnitGenerator.iws" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/META-INF/plugin.xml" afterPath="$PROJECT_DIR$/resources/META-INF/plugin.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/org/intellij/plugins/junitgen/util/JUnitGeneratorUtil.java" afterPath="$PROJECT_DIR$/src/org/intellij/plugins/junitgen/util/JUnitGeneratorUtil.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build.xml" afterPath="$PROJECT_DIR$/build.xml" />
     </list>
     <ignored path="JUnitGenerator.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -154,34 +153,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="JUnitGeneratorSettings.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/org/intellij/plugins/junitgen/JUnitGeneratorSettings.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="111" column="48" selection-start="4099" selection-end="4099" vertical-scroll-proportion="0.0">
-              <folding>
-                <element signature="e#4019#4035#0" expanded="true" />
-                <element signature="e#4488#4504#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="JUnitGeneratorAction.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/org/intellij/plugins/junitgen/action/JUnitGeneratorAction.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="22" column="53" selection-start="776" selection-end="776" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="JUnitGeneratorActionHandler.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/org/intellij/plugins/junitgen/action/JUnitGeneratorActionHandler.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="59" column="0" selection-start="2207" selection-end="2207" vertical-scroll-proportion="-6.72">
-              <folding>
-                <element signature="docComment;method#convertToComposites#0;class#JUnitGeneratorActionHandler#0" expanded="false" />
-              </folding>
+            <state line="59" column="0" selection-start="2207" selection-end="2207" vertical-scroll-proportion="0.0">
+              <folding />
             </state>
           </provider>
         </entry>
@@ -207,16 +183,25 @@
       <file leaf-file-name="build.xml" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/build.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="5" column="0" selection-start="277" selection-end="277" vertical-scroll-proportion="0.0">
+            <state line="51" column="25" selection-start="2273" selection-end="2273" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="JUnitGenerator.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/org/intellij/plugins/junitgen/JUnitGenerator.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="27" column="13" selection-start="734" selection-end="734" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
       <file leaf-file-name="plugin.xml" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/resources/META-INF/plugin.xml">
+        <entry file="file://$PROJECT_DIR$/META-INF/plugin.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="43" column="47" selection-start="2204" selection-end="2204" vertical-scroll-proportion="1.0553098">
+            <state line="61" column="14" selection-start="3144" selection-end="3144" vertical-scroll-proportion="0.9522727">
               <folding />
             </state>
           </provider>
@@ -235,9 +220,7 @@
         <entry file="file://$PROJECT_DIR$/test/org/intellij/plugins/junitgen/JUnitGeneratorUtilTest.java">
           <provider selected="true" editor-type-id="text-editor">
             <state line="17" column="13" selection-start="396" selection-end="396" vertical-scroll-proportion="0.0">
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
+              <folding />
             </state>
           </provider>
         </entry>
@@ -246,10 +229,7 @@
         <entry file="file://$PROJECT_DIR$/src/org/intellij/plugins/junitgen/action/JUnitGeneratorGroup.java">
           <provider selected="true" editor-type-id="text-editor">
             <state line="56" column="26" selection-start="2149" selection-end="2149" vertical-scroll-proportion="0.0">
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#1713#1723#0" expanded="true" />
-              </folding>
+              <folding />
             </state>
           </provider>
         </entry>
@@ -279,7 +259,6 @@
         <option value="$PROJECT_DIR$/test/org/intellij/plugins/junitgen/JUnitGeneratorUtilTest.java" />
         <option value="$PROJECT_DIR$/resources/vm-template.properties" />
         <option value="$PROJECT_DIR$/src/org/intellij/plugins/junitgen/JUnitGeneratorGroup.java" />
-        <option value="$PROJECT_DIR$/META-INF/plugin.xml" />
         <option value="$PROJECT_DIR$/src/org/intellij/plugins/junitgen/action/JUnitGeneratorActionHandler.java" />
         <option value="$PROJECT_DIR$/src/org/intellij/plugins/junitgen/JUnitGeneratorSettings.java" />
         <option value="$PROJECT_DIR$/src/org/intellij/plugins/junitgen/action/JUnitGeneratorAction.java" />
@@ -287,9 +266,10 @@
         <option value="$PROJECT_DIR$/src/org/intellij/plugins/junitgen/JUnitGeneratorFileCreator.java" />
         <option value="$PROJECT_DIR$/src/org/intellij/plugins/junitgen/diff/DiffFileAction.java" />
         <option value="$PROJECT_DIR$/build.properties" />
-        <option value="$PROJECT_DIR$/build.xml" />
         <option value="$PROJECT_DIR$/src/org/intellij/plugins/junitgen/util/JUnitGeneratorUtil.java" />
         <option value="$PROJECT_DIR$/resources/META-INF/plugin.xml" />
+        <option value="$PROJECT_DIR$/build.xml" />
+        <option value="$PROJECT_DIR$/META-INF/plugin.xml" />
       </list>
     </option>
   </component>
@@ -391,7 +371,6 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="PackagesPane">
         <subPane>
           <PATH>
@@ -462,39 +441,18 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="resources" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="junitgen" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="JUnitGenerator" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="junit-generator" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="resources" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
               <option name="myItemId" value="META-INF" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatWidth1" value="132" />
-    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.last.edited" value="SDKs" />
     <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatWidth0" value="114" />
     <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatWidth3" value="46" />
     <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatWidth2" value="132" />
@@ -822,11 +780,11 @@
       <method />
     </configuration>
     <list size="5">
-      <item index="0" class="java.lang.String" itemvalue="Plugin.JUnitTestGenerator" />
-      <item index="1" class="java.lang.String" itemvalue="JUnit.JUnitGeneratorUtilTest.testSourcePathExpression" />
-      <item index="2" class="java.lang.String" itemvalue="JUnit.JUnitGeneratorUtilTest.testSourcePathExpression_1" />
-      <item index="3" class="java.lang.String" itemvalue="JUnit.JUnitGeneratorUtilTest" />
-      <item index="4" class="java.lang.String" itemvalue="JUnit.JUnitGeneratorUtilTest.testReplacementExpression" />
+      <item index="0" class="java.lang.String" itemvalue="JUnit.JUnitGeneratorUtilTest.testSourcePathExpression" />
+      <item index="1" class="java.lang.String" itemvalue="JUnit.JUnitGeneratorUtilTest.testSourcePathExpression_1" />
+      <item index="2" class="java.lang.String" itemvalue="JUnit.JUnitGeneratorUtilTest" />
+      <item index="3" class="java.lang.String" itemvalue="JUnit.JUnitGeneratorUtilTest.testReplacementExpression" />
+      <item index="4" class="java.lang.String" itemvalue="Plugin.JUnitTestGenerator" />
     </list>
     <configuration name="&lt;template&gt;" type="WebApp" default="true" selected="false">
       <Host>localhost</Host>
@@ -932,32 +890,32 @@
     <frame x="-8" y="-8" width="1456" height="876" extended-state="6" />
     <editor active="false" />
     <layout>
-      <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25681493" sideWeight="0.5471698" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Data Sources" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3298217" sideWeight="0.95496535" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Changes" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2857143" sideWeight="0.0" order="17" side_tool="false" content_ui="tabs" />
+      <window_info id="Changes" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32884097" sideWeight="0.0" order="17" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.18651363" sideWeight="0.5471698" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4407008" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.21736011" sideWeight="0.71428573" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.21736011" sideWeight="0.71428573" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.31266847" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="IDEtalk Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="IDEtalk" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.6212938" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.36927223" sideWeight="0.5" order="14" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32998565" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.23529412" sideWeight="0.71428573" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3292683" sideWeight="0.671159" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.044474393" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25681493" sideWeight="0.5471698" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="SVN Repositories" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32884097" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Maven projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="CheckStyle" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4407008" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="TeamCity" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.36927223" sideWeight="0.5" order="14" side_tool="false" content_ui="tabs" />
       <window_info id="Web" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="EJB" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="JProfiler" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
@@ -1001,7 +959,7 @@
     <option name="INCLUDE_TEXT_INTO_SHELF" value="false" />
     <option name="CREATE_PATCH_EXPAND_DETAILS_DEFAULT" value="true" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="removed old META-INF" />
+    <option name="LAST_COMMIT_MESSAGE" value="tweaked the text" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="true" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
@@ -1022,6 +980,8 @@
     <MESSAGE value="workspace change" />
     <MESSAGE value="removed duplicate plugins.xml" />
     <MESSAGE value="removed old META-INF" />
+    <MESSAGE value="fixed icon to use transparency. Updated some code in the plugins.xml file" />
+    <MESSAGE value="tweaked the text" />
   </component>
   <component name="VssConfiguration">
     <option name="CLIENT_PATH" value="" />
@@ -1082,75 +1042,14 @@
     </buildFile>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/org/intellij/plugins/junitgen/JUnitGeneratorSettings.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="111" column="48" selection-start="4099" selection-end="4099" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="e#4019#4035#0" expanded="true" />
-            <element signature="e#4488#4504#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$APPLICATION_HOME_DIR$/lib/openapi.jar!/com/intellij/openapi/editor/actionSystem/EditorAction.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="5" column="22" selection-start="187" selection-end="187" vertical-scroll-proportion="0.17847769">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/org/intellij/plugins/junitgen/action/JUnitGeneratorAction.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="22" column="53" selection-start="776" selection-end="776" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/org/intellij/plugins/junitgen/action/JUnitGeneratorGroup.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="56" column="26" selection-start="2149" selection-end="2149" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#1713#1723#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/org/intellij/plugins/junitgen/action/JUnitGeneratorActionHandler.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="59" column="0" selection-start="2207" selection-end="2207" vertical-scroll-proportion="-6.72">
-          <folding>
-            <element signature="docComment;method#convertToComposites#0;class#JUnitGeneratorActionHandler#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$APPLICATION_HOME_DIR$/lib/openapi.jar!/com/intellij/openapi/application/Application.class">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="44" column="9" selection-start="1735" selection-end="1735" vertical-scroll-proportion="0.3326613">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/org/intellij/plugins/junitgen/JUnitGeneratorFileCreator.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="114" column="16" selection-start="4580" selection-end="4901" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/org/intellij/plugins/junitgen/diff/DiffFileAction.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="66" column="32" selection-start="3009" selection-end="3009" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="44" column="9" selection-start="1735" selection-end="1735" vertical-scroll-proportion="0.3326613" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/build.properties">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="1" column="1" selection-start="15" selection-end="15" vertical-scroll-proportion="0.033464566">
-          <folding />
-        </state>
+        <state line="1" column="1" selection-start="15" selection-end="15" vertical-scroll-proportion="0.033464566" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/resources/org/intellij/plugins/junitgen/smalllogo.gif">
@@ -1158,44 +1057,66 @@
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/test/org/intellij/plugins/junitgen/JUnitGeneratorUtilTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="17" column="13" selection-start="396" selection-end="396" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/build.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="5" column="0" selection-start="277" selection-end="277" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/org/intellij/plugins/junitgen/JUnitGenerator.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="19" column="42" selection-start="618" selection-end="618" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/resources/org/intellij/plugins/junitgen/logo.png">
       <provider selected="true" editor-type-id="images">
         <state />
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/intellij/plugins/junitgen/JUnitGeneratorSettings.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="111" column="48" selection-start="4099" selection-end="4099" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/intellij/plugins/junitgen/action/JUnitGeneratorAction.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="22" column="53" selection-start="776" selection-end="776" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/intellij/plugins/junitgen/action/JUnitGeneratorActionHandler.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="59" column="0" selection-start="2207" selection-end="2207" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/intellij/plugins/junitgen/JUnitGeneratorFileCreator.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="114" column="16" selection-start="4580" selection-end="4901" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/intellij/plugins/junitgen/diff/DiffFileAction.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="66" column="32" selection-start="3009" selection-end="3009" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/intellij/plugins/junitgen/JUnitGenerator.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="27" column="13" selection-start="734" selection-end="734" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/org/intellij/plugins/junitgen/util/JUnitGeneratorUtil.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="59" column="26" selection-start="2070" selection-end="2070" vertical-scroll-proportion="0.0">
+        <state line="59" column="26" selection-start="2070" selection-end="2070" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test/org/intellij/plugins/junitgen/JUnitGeneratorUtilTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="17" column="13" selection-start="396" selection-end="396" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/intellij/plugins/junitgen/action/JUnitGeneratorGroup.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="56" column="26" selection-start="2149" selection-end="2149" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/build.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="51" column="25" selection-start="2273" selection-end="2273" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/resources/META-INF/plugin.xml">
+    <entry file="file://$PROJECT_DIR$/META-INF/plugin.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="43" column="47" selection-start="2204" selection-end="2204" vertical-scroll-proportion="1.0553098">
+        <state line="61" column="14" selection-start="3144" selection-end="3144" vertical-scroll-proportion="0.9522727">
           <folding />
         </state>
       </provider>
@@ -1252,7 +1173,7 @@
       </state>
       <state key="JdkListConfigurable.UI">
         <settings>
-          <last-edited>1.5</last-edited>
+          <last-edited>IDEA IU-111.167</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>
