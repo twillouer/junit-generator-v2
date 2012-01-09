@@ -1,0 +1,67 @@
+<idea-plugin version="2" url="http://code.google.com/p/junit-generator-v2">
+    <name>JUnitGenerator V2.0</name>
+    <id>org.intellij.plugins.junitgen</id>
+    <description><![CDATA[This plugin generates JUnit tests from right click 'Generate...' menu while focused
+    on a java class. The unit test output code can be customized using a provided velocity template to format
+    the code based on the origin class.
+    <p>If a unit test is created where one already exists, the user is prompted for overwrite or merge operation. The merge operation
+    allows the user to selectively create the target file content.</p>]]>
+    </description>
+    <version>1.1</version>
+    <vendor email="josborn@belltracy.com" url="http://www.belltracy.com">Bell Tracy, Ltd.</vendor>
+    <idea-version since-build="8000"/>
+
+    <depends optional="true">com.intellij.modules.java</depends>
+
+    <application-components>
+        <component>
+            <implementation-class>org.intellij.plugins.junitgen.JUnitGenerator</implementation-class>
+        </component>
+    </application-components>
+
+    <project-components>
+        <component>
+            <implementation-class>org.intellij.plugins.junitgen.JUnitGenerator</implementation-class>
+        </component>
+    </project-components>
+
+    <actions>
+        <group id="org.intellij.plugins.junitgen.action.JUnitGeneratorMenu"
+               class="org.intellij.plugins.junitgen.action.JUnitGeneratorGroup"
+               popup="true"
+               text="JUnit Test">
+            <add-to-group group-id="GenerateGroup" anchor="after" relative-to-action="JavaGenerateGroup2"/>
+            <!--
+            <action id="org.intellij.plugins.junitgen.action.JUnitGeneratorAction2"
+                    class="org.intellij.plugins.junitgen.action.JUnitGeneratorAction" text="JUnit Test2"
+                    description="Generate a new JUnit Test or merge into an existing one"/>
+            <separator/>
+            <action id="org.intellij.plugins.junitgen.action.JUnitGeneratorAction3"
+                    class="org.intellij.plugins.junitgen.action.JUnitGeneratorAction" text="JUnit Test3"
+                    description="Generate a new JUnit Test or merge into an existing one"/>-->
+        </group>
+
+    </actions>
+
+    <extensions defaultExtensionNs="com.intellij">
+        <!-- configurable extension -->
+        <applicationConfigurable instance="org.intellij.plugins.junitgen.ui.JUnitGeneratorConfigurable$App"/>
+        <projectConfigurable instance="org.intellij.plugins.junitgen.ui.JUnitGeneratorConfigurable$Prj"/>
+        <!-- service for the settings -->
+        <applicationService serviceInterface="org.intellij.plugins.junitgen.JUnitGeneratorSettings"
+                            serviceImplementation="org.intellij.plugins.junitgen.JUnitGeneratorSettings$App"/>
+        <projectService serviceInterface="org.intellij.plugins.junitgen.JUnitGeneratorSettings"
+                        serviceImplementation="org.intellij.plugins.junitgen.JUnitGeneratorSettings$Prj"/>
+    </extensions>
+
+    <change-notes><![CDATA[
+            This revision contains the following updates:</br>
+            <ul>
+            <li>Upgraded to newest version of the open api
+            <li>Added project and application settings areas
+            <li>Fixed an issue when overwriting an existing test case
+            <li>The configuration now uses a form based swing dialog
+            </ul>
+            ]]>
+    </change-notes>
+</idea-plugin>
