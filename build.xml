@@ -60,19 +60,19 @@
 
         <!-- the sources -->
         <zip file="${dist.file}-src.zip">
-            <fileset dir="META-INF"/>
             <fileset dir="${source.dir}"/>
             <fileset dir="${resources.dir}"/>
             <fileset dir="${test.dir}"/>
-            <fileset dir="${basedir}" includes="build.xml,build.properties"/>
+            <fileset dir="${basedir}" includes="META-INF/plugin.xml,build.xml,build.properties"/>
         </zip>
 
         <!-- the binary -->
         <mkdir dir="${dist.dir}"/>
+        <mkdir dir="${dist.dir}/META-INF"/>
 
         <!-- copy everything we need into the directory -->
         <copy todir="${dist.dir}">
-            <fileset dir="META-INF"/>
+            <fileset dir="${basedir}" includes="META-INF/plugin.xml"/>
             <fileset dir="${resources.dir}"/>
             <fileset dir="${target.dir}/classes"/>
             <filterset refid="dirs.filterset"/>
@@ -83,7 +83,6 @@
                 basedir="${dist.dir}"
                 includes="**"/>
 
-        <!--delete dir="${dist.dir}" includeemptydirs="yes"/-->
     </target>
 
     <target name="compile-test" depends="compile">

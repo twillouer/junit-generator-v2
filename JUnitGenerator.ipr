@@ -134,6 +134,16 @@
     <option name="OUTPUT_DIRECTORY" />
   </component>
   <component name="IdProvider" IDEtalkID="F21B592D1E7A828DFBA5A1833C40AC7D" />
+  <component name="JUnitGeneratorSettings">
+    <option name="generateForOverloadedMethods" value="false" />
+    <option name="listOverloadedMethodsBy" />
+    <option name="outputFilePattern" value="${SOURCEPATH}/../../test/java/${PACKAGE}/${FILENAME}" />
+    <option name="selectedTemplateKey" value="JUnit 4" />
+    <option name="useProjectSettings" value="true" />
+    <option name="vmTemplates">
+      <map />
+    </option>
+  </component>
   <component name="JavadocGenerationManager">
     <option name="OUTPUT_DIRECTORY" />
     <option name="OPTION_SCOPE" value="protected" />

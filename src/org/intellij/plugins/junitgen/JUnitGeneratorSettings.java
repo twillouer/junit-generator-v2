@@ -29,6 +29,7 @@ public class JUnitGeneratorSettings implements PersistentStateComponent<JUnitGen
                     @Storage(id = "app-default", file = "$APP_CONFIG$/junitgenerator-settings.xml")})
     public static class App extends JUnitGeneratorSettings {
         public App() {
+            //load the default state from the application state
             loadDefaultState(this);
         }
     }

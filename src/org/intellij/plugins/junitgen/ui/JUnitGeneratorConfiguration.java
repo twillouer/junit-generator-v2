@@ -91,7 +91,8 @@ public class JUnitGeneratorConfiguration {
     }
 
     public String getListOverloadedMethodsBy() {
-        return this.methodGenerationComboBox.getSelectedItem().toString();
+        return this.methodGenerationComboBox.getSelectedItem() != null ?
+                this.methodGenerationComboBox.getSelectedItem().toString() : null;
     }
 
     public void setListOverloadedMethodsBy(String listOverloadedMethodsBy) {
