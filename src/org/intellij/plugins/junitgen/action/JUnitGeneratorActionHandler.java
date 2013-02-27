@@ -138,7 +138,7 @@ public class JUnitGeneratorActionHandler extends EditorWriteActionHandler {
         List<String> methodNames = new ArrayList<String>();
         List<MethodComposite> methodComposites;
 
-        methodComposites = convertToComposites(genCtx, methodList);
+        methodComposites = toComposites(genCtx, methodList);
 
         if (JUnitGeneratorSettings.getInstance(genCtx.getProject()).isGenerateForOverloadedMethods()) {
             methodComposites = updateOverloadedMethods(genCtx, methodComposites);
@@ -167,39 +167,69 @@ public class JUnitGeneratorActionHandler extends EditorWriteActionHandler {
      * @param methodList the method list
      * @return the list of methods
      */
-    private List<MethodComposite> convertToComposites(JUnitGeneratorContext genCtx, List<PsiMethod> methodList) {
+    private List<MethodComposite> toComposites(JUnitGeneratorContext genCtx, List<PsiMethod> methodList) {
 
-        List<MethodComposite> compositeList = new ArrayList<MethodComposite>();
+        final List<MethodComposite> compositeList = new ArrayList<MethodComposite>();
 
         for (PsiMethod method : methodList) {
-
-            List<String> paramClassList = new ArrayList<String>();
-            for (PsiParameter param : method.getParameterList().getParameters()) {
-                paramClassList.add(param.getType().getCanonicalText());
-            }
-
-            List<String> paramNameList = new ArrayList<String>();
-            for (PsiParameter param : method.getParameterList().getParameters()) {
-                paramNameList.add(param.getName());
-            }
-
-            String signature = createSignature(method);
-
-            List<String> reflectionCode = createReflectionCode(genCtx, method);
-
-            //create the composite object to send to the template
-            final MethodComposite composite = new MethodComposite();
-            composite.setMethod(method);
-            composite.setName(method.getName());
-            composite.setParamClasses(paramClassList);
-            composite.setParamNames(paramNameList);
-            composite.setReflectionCode(reflectionCode);
-            composite.setSignature(signature);
-
-            compositeList.add(composite);
+            compositeList.add(toComposite(genCtx, method));
         }
 
+        //now that we have the complete list, we want to see if any of the methods are overloaded with each other
+        //this will find methods with the same 'name'
+        for (MethodComposite composite : compositeList) {
+            composite.setOverloadedMethods(findOverloadedMethods(composite, compositeList));
+        }
         return compositeList;
+    }
+
+    protected List<MethodComposite> findOverloadedMethods(MethodComposite source, List<MethodComposite> list) {
+        final List<MethodComposite> overloadedMethods = new ArrayList<MethodComposite>();
+        for (MethodComposite method : list) {
+            if (!source.equals(method) && source.getName().equals(method.getName())) {
+                overloadedMethods.add(method);
+            }
+        }
+        return overloadedMethods;
+    }
+
+    /**
+     * Generate the method composite class. This method will recurse until we get to the top of the chain
+     *
+     * @param genCtx the generator context
+     *               * @param method the method in question
+     * @return the method composite object
+     */
+    private MethodComposite toComposite(JUnitGeneratorContext genCtx, PsiMethod method) {
+        List<String> paramClassList = new ArrayList<String>();
+        for (PsiParameter param : method.getParameterList().getParameters()) {
+            paramClassList.add(param.getType().getCanonicalText());
+        }
+
+        List<String> paramNameList = new ArrayList<String>();
+        for (PsiParameter param : method.getParameterList().getParameters()) {
+            paramNameList.add(param.getName());
+        }
+
+        String signature = createSignature(method);
+
+        List<String> reflectionCode = createReflectionCode(genCtx, method);
+
+        //create the composite object to send to the template
+        final MethodComposite composite = new MethodComposite();
+        composite.setMethod(method);
+        composite.setName(method.getName());
+        composite.setParamClasses(paramClassList);
+        composite.setParamNames(paramNameList);
+        composite.setReflectionCode(reflectionCode);
+        composite.setSignature(signature);
+
+        //if the super method is not the same as us, grab the data from that also
+        final PsiMethod[] superMethods = method.findSuperMethods();
+        if (superMethods.length > 0) {
+            composite.setBase(toComposite(genCtx, superMethods[0]));
+        }
+        return composite;
     }
 
     private String createSignature(PsiMethod method) {

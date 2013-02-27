@@ -2,6 +2,7 @@ package org.intellij.plugins.junitgen.bean;
 
 import com.intellij.psi.PsiMethod;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -18,6 +19,8 @@ public class MethodComposite {
     private List<String> paramClasses;
     private List<String> paramNames;
     private List<String> reflectionCode;
+    private MethodComposite base;
+    private List<MethodComposite> overloadedMethods = new ArrayList<MethodComposite>();
 
     public PsiMethod getMethod() {
         return method;
@@ -67,17 +70,33 @@ public class MethodComposite {
         this.reflectionCode = reflectionCode;
     }
 
+    public MethodComposite getBase() {
+        return base;
+    }
+
+    public void setBase(MethodComposite base) {
+        this.base = base;
+    }
+
+    public List<MethodComposite> getOverloadedMethods() {
+        return overloadedMethods;
+    }
+
+    public void setOverloadedMethods(List<MethodComposite> overloadedMethods) {
+        this.overloadedMethods = overloadedMethods;
+    }
+
     @Override
     public String toString() {
-        final StringBuilder sb = new StringBuilder();
-        sb.append("MethodComposite");
-        sb.append("{method=").append(method);
-        sb.append(", name='").append(name).append('\'');
-        sb.append(", signature='").append(signature).append('\'');
-        sb.append(", paramClasses=").append(paramClasses);
-        sb.append(", paramNames=").append(paramNames);
-        sb.append(", reflectionCode=").append(reflectionCode);
-        sb.append('}');
-        return sb.toString();
+        return "MethodComposite{" +
+                "base=" + base +
+                ", method=" + method +
+                ", name='" + name + '\'' +
+                ", signature='" + signature + '\'' +
+                ", paramClasses=" + paramClasses +
+                ", paramNames=" + paramNames +
+                ", reflectionCode=" + reflectionCode +
+                ", overloadedMethods=" + overloadedMethods +
+                '}';
     }
 }
