@@ -25,6 +25,8 @@ import org.intellij.plugins.junitgen.util.LogAdapter;
 import javax.swing.*;
 import java.io.StringWriter;
 import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * This is where the magic happens.
@@ -41,6 +43,8 @@ public class JUnitGeneratorActionHandler extends EditorWriteActionHandler {
     private static final String VIRTUAL_TEMPLATE_NAME = "junitgenerator.vm";
 
     private final String templateKey;
+
+    private static final Pattern ISGETSET = Pattern.compile("^(is|get|set)(.*)");
 
     public JUnitGeneratorActionHandler(String name) {
         this.templateKey = name;
@@ -144,7 +148,7 @@ public class JUnitGeneratorActionHandler extends EditorWriteActionHandler {
             String methodName = method.getName();
 
             if (JUnitGeneratorSettings.getInstance(genCtx.getProject()).isCombineGetterAndSetter() &&
-                    methodName.startsWith("set") || methodName.startsWith("get") || methodName.startsWith("is")) {
+                    ISGETSET.matcher(methodName).find()) {
                 methodName = parseAccessorMutator(methodName, methodList);
             }
 
@@ -324,14 +328,28 @@ public class JUnitGeneratorActionHandler extends EditorWriteActionHandler {
 
         String baseName;
 
-        if (methodName.startsWith("is")) {
-            baseName = methodName.substring(2);
+        Matcher matcher = ISGETSET.matcher(methodName);
+        if (matcher.find()) {
+            baseName = matcher.group(2);
         } else {
-            baseName = methodName.substring(3);
+            baseName = methodName;
         }
-
-        if (methodList.contains("get" + baseName) && (methodList.contains("set" + baseName) || methodList.contains("is" + baseName))) {
-            methodName = "GetSet" + baseName;
+        //enumerate the method list to see if we have methods with set and is or get in them
+        boolean setter = false;
+        boolean getter = false;
+        for (PsiMethod method : (List<PsiMethod>) methodList) {
+            matcher = ISGETSET.matcher(method.getName());
+            if (matcher.find() && baseName.equals(matcher.group(2))) {
+                if ("set".equals(matcher.group(1))) {
+                    setter = true;
+                } else if ("is".equals(matcher.group(1)) || "get".equals(matcher.group(1))) {
+                    getter = true;
+                }
+            }
+        }
+        //if we have a getter and setter, then fix the method to the same name
+        if (getter && setter) {
+            return "GetSet" + baseName;
         }
 
         return methodName;
