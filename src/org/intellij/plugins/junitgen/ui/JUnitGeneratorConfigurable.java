@@ -130,7 +130,7 @@ public abstract class JUnitGeneratorConfigurable implements SearchableConfigurab
     }
 
     public void disposeUIResources() {
-        this.configuration = null;
+        this.configuration.releaseComponents();
     }
 
     public void reset() {

@@ -162,6 +162,7 @@ public class JUnitGeneratorConfiguration {
         if (this.velocityEditor.size() != templates.size()) {
             for (Editor editor : this.velocityEditor) {
                 this.tabbedPane1.remove(editor.getComponent());
+                factory.releaseEditor(editor);
             }
             this.velocityEditor.clear();
         }
@@ -209,5 +210,19 @@ public class JUnitGeneratorConfiguration {
         boolean currentProjectSettingsType = isUseProjectSettings();
         setSettings(JUnitGeneratorSettings.getInstance());
         setUseProjectSettings(currentProjectSettingsType);
+    }
+
+    /**
+     * Clean out the editors and other components that need to be released
+     */
+    public void releaseComponents() {
+        EditorFactory factory = EditorFactory.getInstance();
+        if (this.velocityEditor != null) {
+            for (Editor editor : this.velocityEditor) {
+                this.tabbedPane1.remove(editor.getComponent());
+                factory.releaseEditor(editor);
+            }
+            this.velocityEditor.clear();
+        }
     }
 }
