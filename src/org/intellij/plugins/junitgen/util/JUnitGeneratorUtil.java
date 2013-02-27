@@ -190,12 +190,14 @@ public class JUnitGeneratorUtil {
         String sourcePath = getSourcePath(genCtx.getPsiClass(), genCtx.getDataContext());
 
         if (sourcePath == null) {
-            throw new IllegalArgumentException("file source path cannot be null");
+            throw new IllegalArgumentException(
+                    String.format("File source path cannot be null to create unit test. Was '%s' in a source directory?",
+                            genCtx.getPsiClass().getName()));
         }
 
         String packageName = genCtx.getFile().getPackageName();
 
-        //make sure sourcepath is the first part of the string
+        //make sure source path is the first part of the string
         Matcher matcher = SOURCE_PATH_PATTERN.matcher(sourcePath);
         if (matcher.find()) {
             sourcePath = sourcePath.substring(matcher.start());
