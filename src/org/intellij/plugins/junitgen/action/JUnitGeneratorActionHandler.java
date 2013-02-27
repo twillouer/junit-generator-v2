@@ -175,8 +175,7 @@ public class JUnitGeneratorActionHandler extends EditorWriteActionHandler {
 
             List<String> paramClassList = new ArrayList<String>();
             for (PsiParameter param : method.getParameterList().getParameters()) {
-                String className = (new StringTokenizer(param.getText(), " ")).nextToken();
-                paramClassList.add(className);
+                paramClassList.add(param.getType().getCanonicalText());
             }
 
             List<String> paramNameList = new ArrayList<String>();
@@ -188,7 +187,8 @@ public class JUnitGeneratorActionHandler extends EditorWriteActionHandler {
 
             List<String> reflectionCode = createReflectionCode(genCtx, method);
 
-            MethodComposite composite = new MethodComposite();
+            //create the composite object to send to the template
+            final MethodComposite composite = new MethodComposite();
             composite.setMethod(method);
             composite.setName(method.getName());
             composite.setParamClasses(paramClassList);
