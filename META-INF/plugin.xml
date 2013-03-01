@@ -8,8 +8,10 @@
     allows the user to selectively create the target file content.</p>
     <p>A future revision will allow the user to generate their own test case macros.</p>]]>
     </description>
-    <version>2.0.9</version>
-    <vendor email="josborn@belltracy.com" url="http://www.belltracy.com">Bell Tracy, Ltd.</vendor>
+    <version>2.0.10</version>
+    <vendor email="josborn@belltracy.com" url="http://www.belltracy.com" logo="/org/intellij/plugins/junitgen/logo.png">
+        Bell Tracy, Ltd.
+    </vendor>
     <idea-version since-build="8000"/>
 
     <depends optional="true">com.intellij.modules.java</depends>
@@ -38,13 +40,11 @@
 
     <extensions defaultExtensionNs="com.intellij">
         <!-- configurable extension -->
-        <applicationConfigurable instance="org.intellij.plugins.junitgen.ui.JUnitGeneratorConfigurable$App"/>
-        <projectConfigurable instance="org.intellij.plugins.junitgen.ui.JUnitGeneratorConfigurable$Prj"/>
+        <applicationConfigurable instance="org.intellij.plugins.junitgen.ui.JUnitGeneratorConfigurable$AppConfigurable"/>
+        <projectConfigurable instance="org.intellij.plugins.junitgen.ui.JUnitGeneratorConfigurable$PrjConfigurable"/>
         <!-- service for the settings -->
-        <applicationService serviceInterface="org.intellij.plugins.junitgen.JUnitGeneratorSettings"
-                            serviceImplementation="org.intellij.plugins.junitgen.JUnitGeneratorSettings$App"/>
-        <projectService serviceInterface="org.intellij.plugins.junitgen.JUnitGeneratorSettings"
-                        serviceImplementation="org.intellij.plugins.junitgen.JUnitGeneratorSettings$Prj"/>
+        <applicationService serviceImplementation="org.intellij.plugins.junitgen.ui.JUnitGeneratorConfigurable$AppSettings"/>
+        <projectService serviceImplementation="org.intellij.plugins.junitgen.ui.JUnitGeneratorConfigurable$PrjSettings"/>
     </extensions>
 
     <change-notes><![CDATA[

@@ -3,6 +3,7 @@ package org.intellij.plugins.junitgen.util;
 import com.intellij.openapi.actionSystem.DataContext;
 import com.intellij.openapi.actionSystem.DataKeys;
 import com.intellij.openapi.application.ApplicationManager;
+import com.intellij.openapi.components.ServiceManager;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.roots.ProjectRootManager;
@@ -12,8 +13,10 @@ import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiClass;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.PsiJavaFile;
+import com.intellij.util.xmlb.XmlSerializerUtil;
 import org.intellij.plugins.junitgen.JUnitGeneratorContext;
-import org.intellij.plugins.junitgen.JUnitGeneratorSettings;
+import org.intellij.plugins.junitgen.bean.JUnitGeneratorSettings;
+import org.intellij.plugins.junitgen.ui.JUnitGeneratorConfigurable;
 
 import javax.swing.*;
 import java.io.IOException;
@@ -186,7 +189,7 @@ public class JUnitGeneratorUtil {
      */
     public static String resolveOutputFileName(JUnitGeneratorContext genCtx, String testClassName)
             throws IOException {
-        String outputPattern = JUnitGeneratorSettings.getInstance(genCtx.getProject()).getOutputFilePattern();
+        String outputPattern = getInstance(genCtx.getProject()).getOutputFilePattern();
         String sourcePath = getSourcePath(genCtx.getPsiClass(), genCtx.getDataContext());
 
         if (sourcePath == null) {
@@ -275,5 +278,46 @@ public class JUnitGeneratorUtil {
             }
         }
         return true;
+    }
+
+    /**
+     * Return an instance from the service manager
+     *
+     * @return the settings instance
+     */
+    public static JUnitGeneratorSettings getInstance() {
+        JUnitGeneratorSettings settings = ServiceManager.getService(JUnitGeneratorConfigurable.AppSettings.class).getState();
+        //force the project settings flag to be false because this is the app settings
+        settings.setUseProjectSettings(false);
+        return settings;
+    }
+
+    /**
+     * Return the proper settings based on the configuration of the project. If the project settings
+     * are not used, this method returns the global settings instance
+     *
+     * @param project the project
+     * @return the settings instance
+     */
+    public static JUnitGeneratorSettings getInstance(Project project) {
+        JUnitGeneratorSettings settings = getProjectSettings(project);
+        if (!settings.isUseProjectSettings()) {
+            if (log.isDebugEnabled()) {
+                log.debug("Project is configured for global settings, so we return the global settings");
+            }
+            //copy the global settings over
+            XmlSerializerUtil.copyBean(getInstance(), settings);
+        }
+        return settings;
+    }
+
+    /**
+     * Return the project settings, regardless of the configuration
+     *
+     * @param project the project
+     * @return the settings instance
+     */
+    public static JUnitGeneratorSettings getProjectSettings(Project project) {
+        return ServiceManager.getService(project, JUnitGeneratorConfigurable.PrjSettings.class).getState();
     }
 }

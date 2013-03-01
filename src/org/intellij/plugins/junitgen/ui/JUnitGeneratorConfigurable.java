@@ -10,11 +10,12 @@
  */
 package org.intellij.plugins.junitgen.ui;
 
+import com.intellij.openapi.components.*;
 import com.intellij.openapi.options.ConfigurationException;
 import com.intellij.openapi.options.SearchableConfigurable;
 import com.intellij.openapi.project.Project;
-import com.intellij.openapi.util.Comparing;
-import org.intellij.plugins.junitgen.JUnitGeneratorSettings;
+import com.intellij.util.xmlb.XmlSerializerUtil;
+import org.intellij.plugins.junitgen.bean.JUnitGeneratorSettings;
 import org.intellij.plugins.junitgen.util.JUnitGeneratorUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -23,18 +24,22 @@ import javax.swing.*;
 
 /**
  * JUnitGenerator configuration UI.
- * Could be accessed via File->Settings->(IDE Settings) JUnit Generator
+ * Could be accessed via File->Settings->(IDE Settings) JUnit Generator.
+ * <p>This class serves a few tasks. It acts as the entry point for both the configuration
+ * and the persistent state for both project and application level configurations.</p>
  *
  * @author Alex Nazimok (SCI)
+ * @author Jon Osborn
  * @since <pre>Sep 7, 2004</pre>
  */
-public abstract class JUnitGeneratorConfigurable implements SearchableConfigurable {
+public abstract class JUnitGeneratorConfigurable implements SearchableConfigurable,
+        PersistentStateComponent<JUnitGeneratorSettings> {
 
     private JUnitGeneratorSettings settings;
-    private JUnitGeneratorConfiguration configuration;
+    private JUnitGeneratorConfigurationPanel configuration;
     private final Project project;
 
-    protected JUnitGeneratorConfigurable(JUnitGeneratorSettings settings, @Nullable Project project) {
+    public JUnitGeneratorConfigurable(@NotNull JUnitGeneratorSettings settings, @Nullable Project project) {
         this.settings = settings;
         this.project = project;
     }
@@ -42,9 +47,25 @@ public abstract class JUnitGeneratorConfigurable implements SearchableConfigurab
     /**
      * the global configuration instance
      */
-    public static class App extends JUnitGeneratorConfigurable {
-        public App() {
-            super(JUnitGeneratorSettings.getInstance(), null);
+    @State(
+            name = "JUnitGeneratorAppSettings",
+            storages = {
+                    @Storage(id = "default", file = StoragePathMacros.APP_CONFIG + "/junitgenerator-app-settings.xml")})
+    public static class AppSettings extends JUnitGeneratorConfigurable {
+        public AppSettings() {
+            super(new JUnitGeneratorSettings(), null);
+        }
+
+        @NotNull
+        @Override
+        public String getId() {
+            return "plugins.junitgenerator.application";
+        }
+    }
+
+    public static class AppConfigurable extends JUnitGeneratorConfigurable {
+        public AppConfigurable() {
+            super(JUnitGeneratorUtil.getInstance(), null);
         }
 
         @NotNull
@@ -57,9 +78,26 @@ public abstract class JUnitGeneratorConfigurable implements SearchableConfigurab
     /**
      * Ask for the project specific instance, regardless of the configuration
      */
-    public static class Prj extends JUnitGeneratorConfigurable {
-        Prj(Project project) {
-            super(JUnitGeneratorSettings.getProjectInstance(project), project);
+    @State(
+            name = "JUnitGeneratorProjectSettings",
+            storages = {
+                    @Storage(id = "default", file = StoragePathMacros.PROJECT_FILE),
+                    @Storage(id = "dir", file = StoragePathMacros.PROJECT_CONFIG_DIR + "/junitgenerator-prj-settings.xml", scheme = StorageScheme.DIRECTORY_BASED)})
+    public static class PrjSettings extends JUnitGeneratorConfigurable {
+        public PrjSettings(Project project) {
+            super(new JUnitGeneratorSettings(), project);
+        }
+
+        @NotNull
+        @Override
+        public String getId() {
+            return "plugins.junitgenerator.project";
+        }
+    }
+
+    public static class PrjConfigurable extends JUnitGeneratorConfigurable {
+        public PrjConfigurable(Project project) {
+            super(JUnitGeneratorUtil.getInstance(project), project);
         }
 
         @NotNull
@@ -84,10 +122,14 @@ public abstract class JUnitGeneratorConfigurable implements SearchableConfigurab
 
 
     public JComponent createComponent() {
+        return getConfigurationPanel().getPanel();
+    }
+
+    private JUnitGeneratorConfigurationPanel getConfigurationPanel() {
         if (this.configuration == null) {
-            this.configuration = new JUnitGeneratorConfiguration(this.settings, this.project);
+            this.configuration = new JUnitGeneratorConfigurationPanel(this.settings, this.project);
         }
-        return this.configuration.getPane();
+        return this.configuration;
     }
 
     /**
@@ -98,49 +140,46 @@ public abstract class JUnitGeneratorConfigurable implements SearchableConfigurab
      * @return true if the settings should be 'applied'
      */
     public boolean isModified() {
-
-        boolean delta = !JUnitGeneratorUtil.isEqual(this.settings.getVmTemplates(), this.configuration.getVmTemplates()) ||
-                !Comparing.equal(this.settings.getListOverloadedMethodsBy(), this.configuration.getListOverloadedMethodsBy()) ||
-                !Comparing.equal(this.settings.getOutputFilePattern(), this.configuration.getOutput()) ||
-                this.settings.isCombineGetterAndSetter() != this.configuration.isCombineGetterAndSetter() ||
-                this.settings.isGenerateForOverloadedMethods() != this.configuration.isGenerateForOverloadedMethods() ||
-                this.settings.isUseProjectSettings() != this.configuration.isUseProjectSettings() ||
-                !Comparing.equal(this.settings.getSelectedTemplateKey(), this.configuration.getSelectedTemplateName());
-        return this.configuration != null &&
-                ((this.project == null && delta) ||
-                        (this.project != null && this.configuration.isUseProjectSettings() && delta) ||
-                        (this.project != null && this.settings.isUseProjectSettings() != this.configuration.isUseProjectSettings()));
+        return getConfigurationPanel().isModified();
     }
 
+    /**
+     * Apply the settings. Since this class holds the settings, we are setting them on ourself
+     *
+     * @throws ConfigurationException
+     */
     public void apply() throws ConfigurationException {
-        if (this.configuration != null) {
-            //if we have a project object and we are using project settings, say so
-            this.settings.setUseProjectSettings(this.project != null && this.configuration.isUseProjectSettings());
-            //if we are in a project and use project settings
-            // or are the global instance, get them from the form
-            if (this.project == null || this.settings.isUseProjectSettings()) {
-                this.settings.setCombineGetterAndSetter(this.configuration.isCombineGetterAndSetter());
-                this.settings.setGenerateForOverloadedMethods(this.configuration.isGenerateForOverloadedMethods());
-                this.settings.setListOverloadedMethodsBy(this.configuration.getListOverloadedMethodsBy());
-                this.settings.setOutputFilePattern(this.configuration.getOutput());
-                this.settings.setVmTemplates(this.configuration.getVmTemplates());
-                this.settings.setSelectedTemplateKey(this.configuration.getSelectedTemplateName());
-            }
-        }
+        getConfigurationPanel().apply();
     }
 
+    /**
+     * Need to release stuff that the UI created
+     */
     public void disposeUIResources() {
-        this.configuration.releaseComponents();
+        getConfigurationPanel().release();
     }
 
+    /**
+     * Undo the settings by copying from internal state out to the panel
+     */
     public void reset() {
-        if (this.configuration != null) {
-            this.configuration.setSettings(this.settings);
-        }
+        getConfigurationPanel().reset();
     }
 
     @Override
     public Runnable enableSearch(String s) {
         return null;
+    }
+
+    @Override
+    public JUnitGeneratorSettings getState() {
+        return this.settings;
+    }
+
+    @Override
+    public void loadState(JUnitGeneratorSettings jUnitGeneratorSettings) {
+        if (this.getState() != null) {
+            XmlSerializerUtil.copyBean(jUnitGeneratorSettings, this.getState());
+        }
     }
 }

@@ -15,7 +15,6 @@ import org.apache.velocity.runtime.resource.util.StringResourceRepository;
 import org.apache.velocity.runtime.resource.util.StringResourceRepositoryImpl;
 import org.intellij.plugins.junitgen.JUnitGeneratorContext;
 import org.intellij.plugins.junitgen.JUnitGeneratorFileCreator;
-import org.intellij.plugins.junitgen.JUnitGeneratorSettings;
 import org.intellij.plugins.junitgen.bean.MethodComposite;
 import org.intellij.plugins.junitgen.bean.TemplateEntry;
 import org.intellij.plugins.junitgen.util.DateTool;
@@ -51,7 +50,7 @@ public class JUnitGeneratorActionHandler extends EditorWriteActionHandler {
     }
 
     public String getTemplate(Project project) {
-        return JUnitGeneratorSettings.getInstance(project).getTemplate(this.templateKey);
+        return JUnitGeneratorUtil.getInstance(project).getTemplate(this.templateKey);
     }
 
     /**
@@ -140,14 +139,14 @@ public class JUnitGeneratorActionHandler extends EditorWriteActionHandler {
 
         methodComposites = toComposites(genCtx, methodList);
 
-        if (JUnitGeneratorSettings.getInstance(genCtx.getProject()).isGenerateForOverloadedMethods()) {
+        if (JUnitGeneratorUtil.getInstance(genCtx.getProject()).isGenerateForOverloadedMethods()) {
             methodComposites = updateOverloadedMethods(genCtx, methodComposites);
         }
 
         for (MethodComposite method : methodComposites) {
             String methodName = method.getName();
 
-            if (JUnitGeneratorSettings.getInstance(genCtx.getProject()).isCombineGetterAndSetter() &&
+            if (JUnitGeneratorUtil.getInstance(genCtx.getProject()).isCombineGetterAndSetter() &&
                     ISGETSET.matcher(methodName).find()) {
                 methodName = parseAccessorMutator(methodName, methodList);
             }
@@ -315,7 +314,7 @@ public class JUnitGeneratorActionHandler extends EditorWriteActionHandler {
     private MethodComposite mutateOverloadedMethodName(JUnitGeneratorContext context, MethodComposite method, int count) {
 
         String stringToAppend = "";
-        final String overloadType = JUnitGeneratorSettings.getInstance(context.getProject()).getListOverloadedMethodsBy();
+        final String overloadType = JUnitGeneratorUtil.getInstance(context.getProject()).getListOverloadedMethodsBy();
 
         if (JUnitGeneratorUtil.NUMBER.equalsIgnoreCase(overloadType)) {
             stringToAppend += count;

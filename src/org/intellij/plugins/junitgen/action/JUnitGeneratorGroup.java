@@ -4,7 +4,6 @@ import com.intellij.openapi.actionSystem.*;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.project.DumbAware;
 import com.intellij.openapi.project.Project;
-import org.intellij.plugins.junitgen.JUnitGeneratorSettings;
 import org.intellij.plugins.junitgen.util.JUnitGeneratorUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -53,7 +52,7 @@ public class JUnitGeneratorGroup extends ActionGroup implements DumbAware {
         //DefaultActionGroup subgroup = new DefaultActionGroup();
         //subgroup.getTemplatePresentation().setText("Templates", false);
         //subgroup.setPopup(true);
-        for (String templateKey : JUnitGeneratorSettings.getInstance(anActionEvent.getProject()).getVmTemplates().keySet()) {
+        for (String templateKey : JUnitGeneratorUtil.getInstance(anActionEvent.getProject()).getVmTemplates().keySet()) {
             final AnAction action = getOrCreateAction(templateKey);
             //subgroup.add(action);
             children.add(action);
