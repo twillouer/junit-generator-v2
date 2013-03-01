@@ -3,7 +3,7 @@
   <grid id="27dc6" binding="panel" layout-manager="GridLayoutManager" row-count="2" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
     <margin top="6" left="6" bottom="6" right="6"/>
     <constraints>
-      <xy x="20" y="20" width="576" height="263"/>
+      <xy x="20" y="20" width="576" height="288"/>
     </constraints>
     <properties/>
     <border type="none"/>
@@ -17,7 +17,7 @@
         <properties/>
         <border type="none"/>
         <children>
-          <grid id="aabdd" layout-manager="GridLayoutManager" row-count="6" column-count="3" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+          <grid id="aabdd" layout-manager="GridLayoutManager" row-count="7" column-count="3" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
             <margin top="6" left="6" bottom="6" right="6"/>
             <constraints>
               <tabbedpane title-resource-bundle="vm-template" title-key="junit.generator.ui.title.properties"/>
@@ -83,13 +83,6 @@
                   <text resource-bundle="vm-template" key="junit.generator.ui.outputPath.label"/>
                 </properties>
               </component>
-              <vspacer id="9cde6">
-                <constraints>
-                  <grid row="5" column="0" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false">
-                    <preferred-size width="157" height="14"/>
-                  </grid>
-                </constraints>
-              </vspacer>
               <hspacer id="ee51a">
                 <constraints>
                   <grid row="0" column="2" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false">
@@ -111,6 +104,24 @@
                 </constraints>
                 <properties/>
               </component>
+              <vspacer id="9cde6">
+                <constraints>
+                  <grid row="6" column="0" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false">
+                    <preferred-size width="157" height="14"/>
+                  </grid>
+                </constraints>
+              </vspacer>
+              <component id="9f3e7" class="javax.swing.JLabel" binding="loadDefaultsLabel">
+                <constraints>
+                  <grid row="5" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <font/>
+                  <foreground swing-color="Label.foreground"/>
+                  <text value="&lt;html&gt;&lt;a href=&quot;#&quot;&gt;Load Defaults&lt;/a&gt;&lt;/html&gt;"/>
+                  <toolTipText value="Double click to load default settings."/>
+                </properties>
+              </component>
             </children>
           </grid>
         </children>
@@ -129,7 +140,7 @@
             </constraints>
             <properties>
               <model>
-                <item value="Use Gobal Settings"/>
+                <item value="Use Application Settings"/>
                 <item value="Use Project Settings"/>
               </model>
             </properties>
@@ -153,7 +164,7 @@
             </constraints>
             <properties>
               <actionCommand value="copy"/>
-              <text value="Copy Gobal Settings to Project"/>
+              <text value="Copy Application Settings to Project"/>
             </properties>
           </component>
         </children>

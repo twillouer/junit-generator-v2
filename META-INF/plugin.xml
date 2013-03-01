@@ -36,15 +36,25 @@
                icon="/org/intellij/plugins/junitgen/logo.png">
             <add-to-group group-id="GenerateGroup" anchor="after" relative-to-action="JavaGenerateGroup2"/>
         </group>
+        <group id="org.intellij.plugins.junitgen.action.JUnitGeneratorEditorMenu"
+               popup="true"
+               text="Edit">
+            <reference ref="CutCopyPasteGroup"/>
+            <separator/>
+            <reference ref="ReformatCode"/>
+        </group>
     </actions>
 
     <extensions defaultExtensionNs="com.intellij">
         <!-- configurable extension -->
-        <applicationConfigurable instance="org.intellij.plugins.junitgen.ui.JUnitGeneratorConfigurable$AppConfigurable"/>
+        <applicationConfigurable
+                instance="org.intellij.plugins.junitgen.ui.JUnitGeneratorConfigurable$AppConfigurable"/>
         <projectConfigurable instance="org.intellij.plugins.junitgen.ui.JUnitGeneratorConfigurable$PrjConfigurable"/>
         <!-- service for the settings -->
-        <applicationService serviceImplementation="org.intellij.plugins.junitgen.ui.JUnitGeneratorConfigurable$AppSettings"/>
-        <projectService serviceImplementation="org.intellij.plugins.junitgen.ui.JUnitGeneratorConfigurable$PrjSettings"/>
+        <applicationService
+                serviceImplementation="org.intellij.plugins.junitgen.ui.JUnitGeneratorConfigurable$AppSettings"/>
+        <projectService
+                serviceImplementation="org.intellij.plugins.junitgen.ui.JUnitGeneratorConfigurable$PrjSettings"/>
     </extensions>
 
     <change-notes><![CDATA[

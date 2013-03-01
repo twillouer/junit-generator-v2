@@ -3,7 +3,6 @@ package org.intellij.plugins.junitgen.ui;
 import com.intellij.openapi.actionSystem.ActionManager;
 import com.intellij.openapi.actionSystem.ActionPopupMenu;
 import com.intellij.openapi.actionSystem.DefaultActionGroup;
-import com.intellij.openapi.actionSystem.IdeActions;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.editor.Document;
 import com.intellij.openapi.editor.Editor;
@@ -26,6 +25,9 @@ import java.util.Map;
  */
 public class JUnitGeneratorConfigurationPanel {
 
+    private static final int SETTINGS_INDEX_APP = 0;
+    private static final int SETTINGS_INDEX_PRJ = 1;
+
     private boolean modified;
     private JPanel panel;
     private JTabbedPane tabbedPane1;
@@ -37,7 +39,8 @@ public class JUnitGeneratorConfigurationPanel {
     private JLabel settingsTypeLabel;
     private JButton copyGobalSettingsToButton;
     private JComboBox selectedTemplateComboBox;
-    private final Map<String, Editor> velocityEditor = new HashMap<String, Editor>();
+    private JLabel loadDefaultsLabel;
+    private final Map<String, Editor> velocityEditorMap = new HashMap<String, Editor>();
     private final Project project;
     private JUnitGeneratorSettings settings;
 
@@ -45,6 +48,8 @@ public class JUnitGeneratorConfigurationPanel {
         this.project = project;
         this.settings = settings;
         updateSettingsVisibility();
+
+        //only show these if the project is included as we are in 'project' mode instead of app mode
         this.settingsTypeComboBox.setVisible(this.project != null);
         this.settingsTypeLabel.setVisible(this.project != null);
         //if we use global settings, then hide the project settings
@@ -59,7 +64,7 @@ public class JUnitGeneratorConfigurationPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if ("copy".equals(e.getActionCommand())) {
-                    copyGlobalSettings();
+                    copyApplicationSettingsToProject();
                 }
             }
         });
@@ -71,6 +76,13 @@ public class JUnitGeneratorConfigurationPanel {
             }
         });
         watcher.register(panel);
+        //capture the click event on the label
+        this.loadDefaultsLabel.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                reset(new JUnitGeneratorSettings());
+            }
+        });
     }
 
     public JComponent getPanel() {
@@ -93,16 +105,25 @@ public class JUnitGeneratorConfigurationPanel {
         this.tabbedPane1.setVisible(this.project == null || this.settings.isUseProjectSettings());
     }
 
+    /**
+     * Reset the UI back to the default and commit the change
+     */
     public void reset() {
         reset(this.settings);
         this.modified = false;
     }
 
+    /**
+     * Call this method with new settings to apply that we don't want to commit
+     *
+     * @param uiSettings the settings to apply
+     */
     public void reset(JUnitGeneratorSettings uiSettings) {
         if (uiSettings == null) {
             uiSettings = new JUnitGeneratorSettings();
         }
-        this.settingsTypeComboBox.setSelectedIndex(uiSettings.isUseProjectSettings() ? 1 : 0);
+        this.settingsTypeComboBox.setSelectedIndex(
+                this.project != null && uiSettings.isUseProjectSettings() ? SETTINGS_INDEX_PRJ : SETTINGS_INDEX_APP);
         this.outputTextBox.setText(uiSettings.getOutputFilePattern());
         this.selectedTemplateComboBox.setSelectedItem(uiSettings.getSelectedTemplateKey());
         this.combineGetterAndSetterCheckBox.setSelected(uiSettings.isCombineGetterAndSetter());
@@ -119,79 +140,53 @@ public class JUnitGeneratorConfigurationPanel {
     private Map<String, String> getVmTemplates() {
         final Map<String, String> contents = new HashMap<String, String>();
         //find all of our editors and read them back
-        for (Map.Entry<String, Editor> editorEntry : this.velocityEditor.entrySet()) {
+        for (Map.Entry<String, Editor> editorEntry : this.velocityEditorMap.entrySet()) {
             contents.put(editorEntry.getKey(), editorEntry.getValue().getDocument().getText());
         }
         return contents;
     }
 
     private Editor findEditorForTab(String tabTitle) {
-        return this.velocityEditor.get(tabTitle);
+        return this.velocityEditorMap.get(tabTitle);
     }
 
     private void setVmTemplate(Map<String, String> templates) {
 
         EditorFactory factory = EditorFactory.getInstance();
         //clean up if required
-        if (this.velocityEditor.size() != templates.size()) {
-            for (Editor editor : this.velocityEditor.values()) {
+        if (this.velocityEditorMap.size() != templates.size()) {
+            for (Editor editor : this.velocityEditorMap.values()) {
                 this.tabbedPane1.remove(editor.getComponent());
                 factory.releaseEditor(editor);
             }
-            this.velocityEditor.clear();
+            this.velocityEditorMap.clear();
         }
-        if (this.velocityEditor.size() == 0) {
+        //haven't yet built the editors
+        if (this.velocityEditorMap.size() == 0) {
             //create the editors
             for (Map.Entry<String, String> entry : templates.entrySet()) {
                 final Document velocityTemplate = factory.createDocument(entry.getValue() != null ? entry.getValue() : "");
                 final Editor editor =
                         factory.createEditor(velocityTemplate, this.project, FileTypeManager.getInstance().getFileTypeByExtension("vm"), false);
-                editor.getContentComponent().addKeyListener(new KeyListener() {
-                    @Override
-                    public void keyTyped(KeyEvent e) {
-                        modified = true;
-                    }
-
-                    @Override
-                    public void keyPressed(KeyEvent e) {
-                        modified = true;
-                    }
-
+                editor.getContentComponent().addKeyListener(new KeyAdapter() {
                     @Override
                     public void keyReleased(KeyEvent e) {
                         modified = true;
                     }
                 });
-                editor.getContentComponent().addMouseListener(new MouseListener() {
-                    @Override
-                    public void mouseClicked(MouseEvent e) {
-                    }
-
-                    @Override
-                    public void mousePressed(MouseEvent e) {
-                    }
-
+                editor.getContentComponent().addMouseListener(new MouseAdapter() {
                     @Override
                     public void mouseReleased(MouseEvent e) {
                         if (e.isPopupTrigger()) {
-                            // Single right click
+                            // Single right click unless configured differently
                             ActionManager actionManager = ActionManager.getInstance();
-                            DefaultActionGroup defaultActionGroup = new DefaultActionGroup("short", true);
-                            defaultActionGroup.add(ActionManager.getInstance().getAction(IdeActions.ACTION_EDITOR_REFORMAT));
+                            DefaultActionGroup defaultActionGroup = (DefaultActionGroup) actionManager.getAction("org.intellij.plugins.junitgen.action.JUnitGeneratorEditorMenu");
                             ActionPopupMenu menu = actionManager.createActionPopupMenu("junitgenerator.editor.popup", defaultActionGroup);
                             menu.getComponent().show(e.getComponent(), e.getX(), e.getY());
                         }
                     }
-
-                    @Override
-                    public void mouseEntered(MouseEvent e) {
-                    }
-
-                    @Override
-                    public void mouseExited(MouseEvent e) {
-                    }
                 });
-                this.velocityEditor.put(entry.getKey(), editor);
+                this.velocityEditorMap.put(entry.getKey(), editor);
                 this.tabbedPane1.addTab(entry.getKey(), editor.getComponent());
             }
         } else {
@@ -232,7 +227,7 @@ public class JUnitGeneratorConfigurationPanel {
     /**
      * copy the global settings in but maintain the 'project settings' type
      */
-    public void copyGlobalSettings() {
+    private void copyApplicationSettingsToProject() {
         JUnitGeneratorSettings appSettings = JUnitGeneratorUtil.getInstance();
         appSettings.setUseProjectSettings(this.settings.isUseProjectSettings());
         reset(appSettings);
@@ -254,10 +249,10 @@ public class JUnitGeneratorConfigurationPanel {
      */
     public void release() {
         EditorFactory factory = EditorFactory.getInstance();
-        for (Editor editor : this.velocityEditor.values()) {
+        for (Editor editor : this.velocityEditorMap.values()) {
             this.tabbedPane1.remove(editor.getComponent());
             factory.releaseEditor(editor);
         }
-        this.velocityEditor.clear();
+        this.velocityEditorMap.clear();
     }
 }
