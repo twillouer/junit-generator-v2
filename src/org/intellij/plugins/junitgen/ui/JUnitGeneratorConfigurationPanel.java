@@ -4,11 +4,14 @@ import com.intellij.openapi.actionSystem.ActionManager;
 import com.intellij.openapi.actionSystem.ActionPopupMenu;
 import com.intellij.openapi.actionSystem.DefaultActionGroup;
 import com.intellij.openapi.application.ApplicationManager;
+import com.intellij.openapi.components.ServiceManager;
+import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.editor.Document;
 import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.editor.EditorFactory;
 import com.intellij.openapi.fileTypes.FileTypeManager;
 import com.intellij.openapi.project.Project;
+import com.intellij.psi.PsiFileFactory;
 import com.intellij.ui.UserActivityListener;
 import com.intellij.ui.UserActivityWatcher;
 import org.intellij.plugins.junitgen.bean.JUnitGeneratorSettings;
@@ -83,6 +86,7 @@ public class JUnitGeneratorConfigurationPanel {
                 reset(new JUnitGeneratorSettings());
             }
         });
+        createEditors(settings);
     }
 
     public JComponent getPanel() {
@@ -129,7 +133,7 @@ public class JUnitGeneratorConfigurationPanel {
         this.combineGetterAndSetterCheckBox.setSelected(uiSettings.isCombineGetterAndSetter());
         this.generateForOverloadedMethodsCheckBox.setSelected(uiSettings.isGenerateForOverloadedMethods());
         this.methodGenerationComboBox.setSelectedItem(uiSettings.getListOverloadedMethodsBy());
-        setVmTemplate(uiSettings.getVmTemplates());
+        updateTemplateEditors(uiSettings.getVmTemplates());
     }
 
     /**
@@ -150,22 +154,12 @@ public class JUnitGeneratorConfigurationPanel {
         return this.velocityEditorMap.get(tabTitle);
     }
 
-    private void setVmTemplate(Map<String, String> templates) {
-
+    private void createEditors(JUnitGeneratorSettings settings) {
         EditorFactory factory = EditorFactory.getInstance();
-        //clean up if required
-        if (this.velocityEditorMap.size() != templates.size()) {
-            for (Editor editor : this.velocityEditorMap.values()) {
-                this.tabbedPane1.remove(editor.getComponent());
-                factory.releaseEditor(editor);
-            }
-            this.velocityEditorMap.clear();
-        }
-        //haven't yet built the editors
-        if (this.velocityEditorMap.size() == 0) {
-            //create the editors
-            for (Map.Entry<String, String> entry : templates.entrySet()) {
-                final Document velocityTemplate = factory.createDocument(entry.getValue() != null ? entry.getValue() : "");
+        //create the editors
+        for (Map.Entry<String, String> entry : settings.getVmTemplates().entrySet()) {
+            final Document velocityTemplate = factory.createDocument(entry.getValue() != null ? entry.getValue() : "");
+            try {
                 final Editor editor =
                         factory.createEditor(velocityTemplate, this.project, FileTypeManager.getInstance().getFileTypeByExtension("vm"), false);
                 editor.getContentComponent().addKeyListener(new KeyAdapter() {
@@ -188,24 +182,38 @@ public class JUnitGeneratorConfigurationPanel {
                 });
                 this.velocityEditorMap.put(entry.getKey(), editor);
                 this.tabbedPane1.addTab(entry.getKey(), editor.getComponent());
-            }
-        } else {
-            //just update them
-            for (Map.Entry<String, String> entry : templates.entrySet()) {
-                //grab the components and replace the content since the editor was already built
-                final Editor editor = findEditorForTab(entry.getKey());
-                if (editor != null) {
-                    final String text = entry.getValue();
-                    ApplicationManager.getApplication()
-                            .runWriteAction(new Runnable() {
-                                @Override
-                                public void run() {
-                                    editor.getDocument().setText(text);
-                                }
-                            });
-                }
+            } catch (Exception e) {
+                Logger.getInstance(JUnitGeneratorConfigurationPanel.class).warn(e);
             }
         }
+
+    }
+
+    private void updateTemplateEditors(Map<String, String> templates) {
+        //just update them
+        for (Map.Entry<String, String> entry : templates.entrySet()) {
+            //grab the components and replace the content since the editor was already built
+            final Editor editor = findEditorForTab(entry.getKey());
+            if (editor != null) {
+                final String text = entry.getValue();
+                ApplicationManager.getApplication().invokeLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        ApplicationManager.getApplication()
+                                .runWriteAction(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        editor.getDocument().setText(text);
+                                    }
+                                });
+                    }
+                });
+            }
+        }
+    }
+
+    public static PsiFileFactory getPsiInstance() {
+        return ServiceManager.getService(PsiFileFactory.class);
     }
 
     private void setupSelectedTemplate(Map<String, String> templates, String selectedTemplateKey) {

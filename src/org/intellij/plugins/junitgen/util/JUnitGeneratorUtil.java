@@ -256,31 +256,6 @@ public class JUnitGeneratorUtil {
     }
 
     /**
-     * Compare the maps to see if they are equal. we check the keys first, then pull out the values and compare that
-     * the values are equal. If the map values are both null, they are considered equal
-     *
-     * @param one the first map
-     * @param two the second map
-     * @param <K> the key type
-     * @param <V> the value type
-     * @return true if equal
-     */
-    public static <K, V> boolean isEqual(Map<K, V> one, Map<K, V> two) {
-        for (K key : one.keySet()) {
-            if (!two.containsKey(key)) {
-                return false;
-            }
-            final V valueTwo = two.get(key);
-            final V valueOne = one.get(key);
-            if (valueOne != null && !valueOne.equals(valueTwo) ||
-                    valueTwo != null && !valueTwo.equals(valueOne)) {
-                return false;
-            }
-        }
-        return true;
-    }
-
-    /**
      * Return an instance from the service manager
      *
      * @return the settings instance
@@ -288,7 +263,9 @@ public class JUnitGeneratorUtil {
     public static JUnitGeneratorSettings getInstance() {
         JUnitGeneratorSettings settings = ServiceManager.getService(JUnitGeneratorConfigurable.AppSettings.class).getState();
         //force the project settings flag to be false because this is the app settings
-        settings.setUseProjectSettings(false);
+        if ( settings != null ) {
+            settings.setUseProjectSettings(false);
+        }
         return settings;
     }
 
