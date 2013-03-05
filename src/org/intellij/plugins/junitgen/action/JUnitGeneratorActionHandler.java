@@ -353,6 +353,7 @@ public class JUnitGeneratorActionHandler extends EditorWriteActionHandler {
      * @param methodList - Entire list of method using to create test
      * @return String updated method name if list contains both accessor and modifier for base name
      */
+    @SuppressWarnings("unchecked")
     private String parseAccessorMutator(String methodName, List methodList) {
 
         String baseName;

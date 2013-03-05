@@ -58,7 +58,17 @@
     </extensions>
 
     <change-notes><![CDATA[
-            This revision contains the following updates:</br>
+            <p>This revision contains the following updates to issues:</p>
+            <ul>
+            <li><a href="https://code.google.com/p/junit-generator-v2/issues/detail?id=2">https://code.google.com/p/junit-generator-v2/issues/detail?id=2</a>
+            <li><a href="https://code.google.com/p/junit-generator-v2/issues/detail?id=3">https://code.google.com/p/junit-generator-v2/issues/detail?id=3</a>
+            <li><a href="https://code.google.com/p/junit-generator-v2/issues/detail?id=4">https://code.google.com/p/junit-generator-v2/issues/detail?id=4</a>
+            <li><a href="https://code.google.com/p/junit-generator-v2/issues/detail?id=6">https://code.google.com/p/junit-generator-v2/issues/detail?id=6</a>
+            <li><a href="https://code.google.com/p/junit-generator-v2/issues/detail?id=7">https://code.google.com/p/junit-generator-v2/issues/detail?id=7</a>
+            </ul>
+            <br/>
+            <p>Previous release notes:</p>
+            Revision 2.0.9 contains the following updates:</br>
             <ul>
             <li>Upgraded to newest version of the open api
             <li>Added project and application settings areas
