@@ -43,7 +43,7 @@
             <separator/>
             <reference ref="ReformatCode"/>
         </group>
-        <action id="org.intellij.plugins.assertjgen.action.AsserJGenerateAction" class="org.intellij.plugins.assertjgen.action.AsserJGenerateAction" text="Generate AssertJ assertion"
+        <action id="org.intellij.plugins.assertjgen.action.AssertJGenerateAction" class="org.intellij.plugins.assertjgen.action.AssertJGenerateAction" text="Generate AssertJ assertion"
                 description="Generate the Assertion with AssertJ generator for the class.">
             <add-to-group group-id="GenerateGroup" anchor="last"/>
             <keyboard-shortcut keymap="$default" first-keystroke="shift ctrl alt A"/>
