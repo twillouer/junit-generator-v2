@@ -59,6 +59,7 @@ public class JUnitGeneratorActionHandler extends EditorWriteActionHandler {
      * @param editor      IDEA Editor
      * @param dataContext DataCOntext
      */
+    @Override
     public void executeWriteAction(Editor editor, DataContext dataContext) {
         PsiJavaFile file = JUnitGeneratorUtil.getSelectedJavaFile(dataContext);
 
@@ -196,7 +197,7 @@ public class JUnitGeneratorActionHandler extends EditorWriteActionHandler {
      * Generate the method composite class. This method will recurse until we get to the top of the chain
      *
      * @param genCtx the generator context
-     *               * @param method the method in question
+     * @param method the method in question
      * @return the method composite object
      */
     private MethodComposite toComposite(JUnitGeneratorContext genCtx, PsiMethod method) {

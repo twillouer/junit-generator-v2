@@ -2,6 +2,7 @@ package org.intellij.plugins.junitgen.util;
 
 import com.intellij.openapi.actionSystem.DataContext;
 import com.intellij.openapi.actionSystem.DataKeys;
+import com.intellij.openapi.actionSystem.LangDataKeys;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.components.ServiceManager;
 import com.intellij.openapi.diagnostic.Logger;
@@ -81,7 +82,7 @@ public class JUnitGeneratorUtil {
                 sb.append(key).append('.').append(i);
                 values.add(getProperty(sb.toString()));
                 //clean out the string buffer
-                sb.delete(0, sb.length());
+                sb.setLength(0);
             }
         } catch (Exception e) {
             //enumeration complete
@@ -111,7 +112,7 @@ public class JUnitGeneratorUtil {
      * @return The current javafile. Null if not a javafile.
      */
     public static PsiJavaFile getSelectedJavaFile(DataContext dataContext) {
-        final PsiFile psiFile = (PsiFile) dataContext.getData("psi.File");
+        final PsiFile psiFile = (PsiFile) dataContext.getData(LangDataKeys.PSI_FILE.getName());
 
         if (!(psiFile instanceof PsiJavaFile)) {
             return null;
