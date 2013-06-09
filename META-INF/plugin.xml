@@ -1,5 +1,5 @@
 <idea-plugin version="2" url="http://code.google.com/p/junit-generator-v2">
-    <name>JUnitGenerator V2.0</name>
+    <name>JUnitGenerator V2.1</name>
     <id>org.intellij.plugins.junitgen</id>
     <description><![CDATA[This plugin generates JUnit tests from right click 'Generate...' menu while focused
     on a java class. The unit test output code can be customized using a provided velocity template to format
@@ -8,7 +8,7 @@
     allows the user to selectively create the target file content.</p>
     <p>A future revision will allow the user to generate their own test case macros.</p>]]>
     </description>
-    <version>2.0.10</version>
+    <version>2.1.0</version>
     <vendor email="josborn@belltracy.com" url="http://www.belltracy.com" logo="/org/intellij/plugins/junitgen/logo.png">
         Bell Tracy, Ltd.
     </vendor>
