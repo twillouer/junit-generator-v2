@@ -6,13 +6,13 @@
         <fail unless="Version"
               message="Version property is missing, see build.properties or set the JDK property if running inside intellij"/>
 
-        <property name="source.dir" value="./src"/>
-        <property name="resources.dir" value="./resources"/>
+        <property name="source.dir" value="./src/main/java"/>
+        <property name="resources.dir" value="./src/main/resources"/>
         <property name="target.dir" value="./target"/>
         <property name="jar.file.name" value="junitgen.jar"/>
         <property name="dist.file" location="junitgen-${Version}"/>
         <property name="dist.dir" value="./dist"/>
-        <property name="test.dir" value="./test"/>
+        <property name="test.dir" value="./src/main/test"/>
         <property name="idea.lib" value="${idea.home}/lib"/>
 
         <filterset id="dirs.filterset">
@@ -63,7 +63,7 @@
             <fileset dir="${source.dir}"/>
             <fileset dir="${resources.dir}"/>
             <fileset dir="${test.dir}"/>
-            <fileset dir="${basedir}" includes="META-INF/plugin.xml,build.xml,build.properties"/>
+            <fileset dir="${basedir}" includes="src/main/resources/META-INF/plugin.xml,build.xml,build.properties"/>
         </zip>
 
         <!-- the binary -->
@@ -72,7 +72,7 @@
 
         <!-- copy everything we need into the directory -->
         <copy todir="${dist.dir}">
-            <fileset dir="${basedir}" includes="META-INF/plugin.xml"/>
+            <fileset dir="${basedir}" includes="src/main/resources/META-INF/plugin.xml"/>
             <fileset dir="${resources.dir}"/>
             <fileset dir="${target.dir}/classes"/>
             <filterset refid="dirs.filterset"/>
