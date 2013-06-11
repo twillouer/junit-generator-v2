@@ -80,7 +80,7 @@ public class AssertJGenerateAction extends AnAction {
   }
 
   public Template getTemplate(Project project, String templateKey, Template.Type type) {
-    return new Template(type, JUnitGeneratorUtil.getInstance(project).getTemplate(templateKey));
+    return new Template(type, JUnitGeneratorUtil.getInstance(project).getAssertJTemplate(templateKey));
   }
 
   private PsiClass getPsiClassFromContext(AnActionEvent e) {

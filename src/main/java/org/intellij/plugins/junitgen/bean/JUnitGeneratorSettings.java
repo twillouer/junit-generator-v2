@@ -23,6 +23,7 @@ public class JUnitGeneratorSettings {
     private boolean combineGetterAndSetter;
     private Map<String, String> vmTemplates = new HashMap<String, String>();
     private String selectedTemplateKey;
+    private Map<String, String> assertJTemplates = new HashMap<String, String>();
     private boolean useProjectSettings;
 
     public JUnitGeneratorSettings() {
@@ -85,10 +86,26 @@ public class JUnitGeneratorSettings {
         this.vmTemplates = vmTemplates;
     }
 
+    public Map<String, String> getAssertJTemplates() {
+        return assertJTemplates;
+    }
+
+    public void setAssertJTemplates(Map<String, String> assertJTemplates) {
+        this.assertJTemplates = assertJTemplates;
+    }
+
     @Transient
     public String getTemplate(String key) {
         if (key != null) {
             return this.vmTemplates.get(key);
+        }
+        return null;
+    }
+
+    @Transient
+    public String getAssertJTemplate(String key) {
+        if (key != null) {
+            return this.assertJTemplates.get(key);
         }
         return null;
     }
@@ -115,7 +132,20 @@ public class JUnitGeneratorSettings {
         }
         settings.setVmTemplates(map);
         settings.setUseProjectSettings(false);
-        settings.setSelectedTemplateKey(names.get(0));
+        settings.setSelectedTemplateKey(names.get(1)); // Junit4 by default.
+
+        // AssertJ Part
+        final List<String> assertjNames = Arrays.asList(JUnitGeneratorUtil.getDelimitedProperty("assertj.generator.vm.names", ","));
+        final List<String> assertJTemplates = JUnitGeneratorUtil.getPropertyList("assertj.generator.vm");
+        if (assertjNames.size() != assertJTemplates.size()) {
+            throw new IllegalArgumentException("assertj template names and definitions must be equal");
+        }
+        final Map<String, String> assertjMap = new HashMap<String, String>(assertjNames.size());
+        for (int i = 0; i < assertjNames.size(); i++) {
+            assertjMap.put(assertjNames.get(i), assertJTemplates.get(i));
+        }
+        settings.setAssertJTemplates(map);
+
         return settings;
     }
 
@@ -128,6 +158,7 @@ public class JUnitGeneratorSettings {
                 ", listOverloadedMethodsBy='" + listOverloadedMethodsBy + '\'' +
                 ", vmTemplates=" + vmTemplates +
                 ", selectedTemplateKey='" + selectedTemplateKey + '\'' +
+                ", assertJTemplates=" + assertJTemplates +
                 ", useProjectSettings=" + useProjectSettings +
                 '}';
     }
