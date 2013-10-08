@@ -60,6 +60,7 @@ public class AssertJGenerateAction extends AnAction {
       BaseAssertionGenerator baseAssertionGenerator = new BaseAssertionGenerator( //
           getTemplate(project, "AssertJ ClassTemplate", Template.Type.ASSERT_CLASS),//
           getTemplate(project, "AssertJ has", Template.Type.HAS), //
+          getTemplate(project, "AssertJ hasPrimitive", Template.Type.HAS_FOR_PRIMITIVE), //
           getTemplate(project, "AssertJ Element Iterable", Template.Type.HAS_FOR_ITERABLE), //
           getTemplate(project, "AssertJ Element Array", Template.Type.HAS_FOR_ARRAY), //
           getTemplate(project, "AssertJ Element is", Template.Type.IS));
@@ -80,7 +81,7 @@ public class AssertJGenerateAction extends AnAction {
   }
 
   public Template getTemplate(Project project, String templateKey, Template.Type type) {
-    return new Template(type, JUnitGeneratorUtil.getInstance(project).getTemplate(templateKey));
+    return new Template(type, JUnitGeneratorUtil.getInstance(project).getAssertJTemplate(templateKey));
   }
 
   private PsiClass getPsiClassFromContext(AnActionEvent e) {
