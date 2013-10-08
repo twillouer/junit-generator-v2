@@ -11,6 +11,11 @@
             <includes>
                 <include>org.intellij.plugins:junitgen</include>
                 <include>org.assertj:assertj-assertions-generator-idea</include>
+                <include>org.assertj:assertj-assertions-generator</include>
+                <include>commons-io:commons-io</include>
+                <include>org.apache.commons:commons-lang3</include>
+                <include>org.reflections:reflections</include>
+                <include>ch.qos.logback:logback-classic</include>
             </includes>
         </dependencySet>
     </dependencySets>

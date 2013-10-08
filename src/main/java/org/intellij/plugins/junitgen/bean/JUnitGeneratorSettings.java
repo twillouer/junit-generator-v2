@@ -1,5 +1,6 @@
 package org.intellij.plugins.junitgen.bean;
 
+import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.util.xmlb.annotations.Transient;
 import org.intellij.plugins.junitgen.util.JUnitGeneratorUtil;
 
@@ -15,6 +16,7 @@ import java.util.Map;
  * @since 2/28/13 8:31 AM
  */
 public class JUnitGeneratorSettings {
+    private static final Logger log = JUnitGeneratorUtil.getLogger(JUnitGeneratorSettings.class);
 
 
     private String outputFilePattern;
@@ -121,6 +123,8 @@ public class JUnitGeneratorSettings {
         settings.setGenerateForOverloadedMethods(true);
         settings.setListOverloadedMethodsBy("paramName");
         settings.setCombineGetterAndSetter(false);
+
+
         final List<String> names = Arrays.asList(JUnitGeneratorUtil.getDelimitedProperty("junit.generator.vm.names", ","));
         final List<String> templates = JUnitGeneratorUtil.getPropertyList("junit.generator.vm");
         if (names.size() != templates.size()) {
@@ -144,7 +148,7 @@ public class JUnitGeneratorSettings {
         for (int i = 0; i < assertjNames.size(); i++) {
             assertjMap.put(assertjNames.get(i), assertJTemplates.get(i));
         }
-        settings.setAssertJTemplates(map);
+        settings.setAssertJTemplates(assertjMap);
 
         return settings;
     }

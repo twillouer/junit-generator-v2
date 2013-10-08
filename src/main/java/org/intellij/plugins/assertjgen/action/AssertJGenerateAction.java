@@ -65,7 +65,7 @@ public class AssertJGenerateAction extends AnAction {
           getTemplate(project, "AssertJ Element Array", Template.Type.HAS_FOR_ARRAY), //
           getTemplate(project, "AssertJ Element is", Template.Type.IS));
       ClassDescription classDescription = classDescriptionConverter.convertToClassDescription(psiClass);
-      logger.debug("ClassDescription : " + classDescription);
+      logger.info("ClassDescription : " + classDescription);
       String content = baseAssertionGenerator.generateCustomAssertionContentFor(classDescription);
       final StringWriter writer = new StringWriter();
       writer.append(content);

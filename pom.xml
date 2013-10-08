@@ -65,6 +65,11 @@
             <version>1.1.0-SNAPSHOT</version>
         </dependency>
         <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <version>1.0.13</version>
+        </dependency>
+        <dependency>
             <groupId>org.apache.velocity</groupId>
             <artifactId>velocity</artifactId>
             <version>1.7</version>
@@ -107,10 +112,13 @@
             <scope>provided</scope>
         </dependency>
         <dependency>
-            <groupId>ch.qos.logback</groupId>
-            <artifactId>logback-classic</artifactId>
-            <version>1.0.13</version>
+            <groupId>com.intellij.idea</groupId>
+            <artifactId>trove4j</artifactId>
+            <version>${version-intellij}</version>
+            <scope>test</scope>
         </dependency>
+
+        <!-- test -->
         <dependency>
             <groupId>org.assertj</groupId>
             <artifactId>assertj-core</artifactId>
@@ -121,12 +129,6 @@
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <version>4.11</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>com.intellij.idea</groupId>
-            <artifactId>trove4j</artifactId>
-            <version>${version-intellij}</version>
             <scope>test</scope>
         </dependency>
     </dependencies>
