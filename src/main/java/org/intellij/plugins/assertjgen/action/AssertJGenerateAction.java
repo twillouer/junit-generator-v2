@@ -63,7 +63,10 @@ public class AssertJGenerateAction extends AnAction {
           getTemplate(project, "AssertJ hasPrimitive", Template.Type.HAS_FOR_PRIMITIVE), //
           getTemplate(project, "AssertJ Element Iterable", Template.Type.HAS_FOR_ITERABLE), //
           getTemplate(project, "AssertJ Element Array", Template.Type.HAS_FOR_ARRAY), //
-          getTemplate(project, "AssertJ Element is", Template.Type.IS));
+          getTemplate(project, "AssertJ Element is", Template.Type.IS), //
+          getTemplate(project, "AssertJ entry point assertions class", Template.Type.ENTRY_POINT_ASSERTIONS_CLASS), //
+          getTemplate(project, "AssertJ entry point assertion", Template.Type.ENTRY_POINT_ASSERTION)
+           );
       ClassDescription classDescription = classDescriptionConverter.convertToClassDescription(psiClass);
       logger.info("ClassDescription : " + classDescription);
       String content = baseAssertionGenerator.generateCustomAssertionContentFor(classDescription);
